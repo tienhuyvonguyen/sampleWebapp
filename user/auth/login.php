@@ -2,7 +2,7 @@
 
 $showError = false;
 
-include("../dbConnect.php");
+require("../dbConnect.php");
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($num == 1) {
         $_SESSION['login_user'] = $myusername;
-        header("location: ../welcome.php");
+        header("location: ../profile.php");
     } else {
         $showError = "Your Login Name or Password is invalid! <br> Please sign up before login.";
     }

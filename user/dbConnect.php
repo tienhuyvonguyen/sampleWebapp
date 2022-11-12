@@ -11,3 +11,7 @@ if ($conn) {
 } else {
     echo "Unable to establish a connection.";
 }
+// if (!$conn) {
+//     echo "\nPDO::errorInfo():\n";
+//     print_r($dbh->errorInfo());
+// }
