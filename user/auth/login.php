@@ -1,3 +1,36 @@
+<?php
+
+$showError = false;
+
+include("../dbConnect.php");
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // username and password sent from form 
+
+    $myusername = $_POST['username'];
+    $mypassword = $_POST['password'];
+    // $hash = password_hash(
+    //     $mypassword,
+    //     PASSWORD_DEFAULT
+    // );
+    $sql = "SELECT * FROM users WHERE username = '$myusername' and userPassword = '$mypassword'";
+    $result = $conn->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
+    $result->execute();
+    $num = $result->rowCount();
+
+    // If result matched $myusername and $mypassword, table row must be 1 row
+
+    if ($num == 1) {
+        $_SESSION['login_user'] = $myusername;
+        header("location: ../welcome.php");
+    } else {
+        $showError = "Your Login Name or Password is invalid! <br> Please sign up before login.";
+    }
+}
+?>
+
+
 <!doctype html>
 
 <html lang="en">
@@ -61,7 +94,7 @@
     <div class="container my-4 ">
 
         <h1 class="text-center">Login here</h1>
-        <form action="signup.php" method="post">
+        <form action="login.php" method="post">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
@@ -73,6 +106,9 @@
             <button type="submit" class="btn btn-primary">
                 Login
             </button>
+            <a href="signup.php" class="btn btn-primary">
+                Signup
+            </a>
         </form>
     </div>
 
