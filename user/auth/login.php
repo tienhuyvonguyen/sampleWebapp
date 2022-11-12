@@ -28,9 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else if ($num == 1) {
         if (!empty($_POST["remember"])) {
             //COOKIES for username
-            setcookie("user_login", $_POST["username"], time() + (10 * 365 * 24 * 60 * 60));
+            setcookie("user_login", $_POST["username"], time() + (86400 * 7));
             //COOKIES for password
-            setcookie("userpassword", $_POST["password"], time() + (10 * 365 * 24 * 60 * 60));
+            setcookie("userpassword", $_POST["password"], time() + (86400 * 7));
         } else {
             if (isset($_COOKIE["user_login"])) {
                 setcookie("user_login", "");
