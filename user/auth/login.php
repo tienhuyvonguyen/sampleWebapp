@@ -7,9 +7,11 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // username and password sent from form 
-
     $myusername = $_POST['username'];
     $mypassword = $_POST['password'];
+    $capt1 = $_POST["vercode"];
+    $capt2 = $_SESSION["vercode"];
+
     // $hash = password_hash(
     //     $mypassword,
     //     PASSWORD_DEFAULT
@@ -18,18 +20,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
     $result->execute();
     $num = $result->rowCount();
+    //captcha variables
 
-    // If result matched $myusername and $mypassword, table row must be 1 row
-
-    if ($num == 1) {
+    //   If result matched $myusername and $mypassword, table row must be 1 row & check captcha
+    if ($capt1 != $capt2 or $capt2 == '') {
+        $showError = "Invalid Captcha";
+    } else if ($num == 1) {
+        if (!empty($_POST["remember"])) {
+            //COOKIES for username
+            setcookie("user_login", $_POST["username"], time() + (10 * 365 * 24 * 60 * 60));
+            //COOKIES for password
+            setcookie("userpassword", $_POST["password"], time() + (10 * 365 * 24 * 60 * 60));
+        } else {
+            if (isset($_COOKIE["user_login"])) {
+                setcookie("user_login", "");
+                if (isset($_COOKIE["userpassword"])) {
+                    setcookie("userpassword", "");
+                }
+            }
+        }
         $_SESSION['login_user'] = $myusername;
         header("location: ../profile.php");
     } else {
-        $showError = "Your Login Name or Password is invalid! <br> Please sign up before login.";
+        $showError = "Your Login Name or Password is invalid";
     }
+    // test in case of error
+    // if ($num == 1) {
+    //     $_SESSION['login_user'] = $myusername;
+    //     header("location: ../profile.php");
+    // } else {
+    //     $showError = "Your Login Name or Password is invalid";
+    // }
 }
-?>
 
+?>
 
 <!doctype html>
 
@@ -97,21 +121,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="login.php" method="post">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" value="<?php if (isset($_COOKIE["user_login"])) {
+                                                                                                                                echo $_COOKIE["user_login"];
+                                                                                                                            } ?>">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <input type="password" class="form-control" id="password" name="password" value="<?php if (isset($_COOKIE["userpassword"])) {
+                                                                                                        echo $_COOKIE["userpassword"];
+                                                                                                    } ?>">
             </div>
+            <!-- captcha -->
+            <div class="form-group small clearfix">
+                <label class="checkbox-inline">Verification Code</label>
+                <img src="captcha.php">
+            </div>
+            <div class="form-group">
+                <input type="text" name="vercode" class="form-control" placeholder="Verfication Code" required="required">
+            </div>
+            <!-- captcha -->
+
+            <!-- remember me -->
+            <div class="field-group">
+                <div><input type="checkbox" name="remember" id="remember" <?php if (isset($_COOKIE["user_login"])) { ?> checked <?php } ?> /> </div>
+                <label for="remember-me">Remember me</label>
+            </div>
+            <!-- remember me -->
             <button type="submit" class="btn btn-primary">
                 Login
             </button>
             <a href="signup.php" class="btn btn-primary">
                 Signup
             </a>
+
         </form>
     </div>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
