@@ -1,5 +1,5 @@
 <?php
-include "./session.php";
+include "./auth/session.php";
 
 if (isset($_POST['password']) && isset($_POST['confirmPassword'])) {
     $password = $_POST['password'];
