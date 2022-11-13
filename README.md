@@ -1,4 +1,5 @@
 # sampleWebapp
+Synk security for vuln and code quality check
 CMC project 
 - ~~Đăng ký tài khoản~~
 - ~~Đăng nhập (có tính năng remember me, sử dụng captcha)~~

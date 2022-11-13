@@ -13,10 +13,7 @@ include "./auth/session.php";
 
 <body>
     <h1>Welcome <?php echo "<strong> $login_session </strong> " ?> to the site</h1>
-    <a href="./auth/logout.php">Logout</a>
-    <!-- update password -->
-    
-
+    <a href="../auth/logout.php">Logout</a>
 </body>
 
 </html>

@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //     $mypassword,
     //     PASSWORD_DEFAULT
     // );
+
     $sql = "SELECT * FROM users WHERE username = '$myusername' and userPassword = '$mypassword'";
     $result = $conn->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
     $result->execute();
@@ -28,9 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else if ($num == 1) {
         if (!empty($_POST["remember"])) {
             //COOKIES for username
-            setcookie("user_login", $_POST["username"], time() + (86400 * 7));
+            setcookie("user_login", htmlspecialchars($_POST["username"]), time() + (86400 * 7));
             //COOKIES for password
-            setcookie("userpassword", $_POST["password"], time() + (86400 * 7));
+            setcookie("userpassword", htmlspecialchars($_POST["password"]), time() + (86400 * 7));
         } else {
             if (isset($_COOKIE["user_login"])) {
                 setcookie("user_login", "");
@@ -40,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
         $_SESSION['login_user'] = $myusername;
-        header("location: ../profile.php");
+        header("location: ../profile/profile.php");
     } else {
         $showError = "Your Login Name or Password is invalid";
     }
@@ -122,13 +123,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" value="<?php if (isset($_COOKIE["user_login"])) {
-                                                                                                                                echo $_COOKIE["user_login"];
+                                                                                                                                echo htmlspecialchars($_COOKIE["user_login"]);
                                                                                                                             } ?>">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" value="<?php if (isset($_COOKIE["userpassword"])) {
-                                                                                                        echo $_COOKIE["userpassword"];
+                                                                                                        echo htmlspecialchars($_COOKIE["userpassword"]);
                                                                                                     } ?>">
             </div>
             <!-- captcha -->

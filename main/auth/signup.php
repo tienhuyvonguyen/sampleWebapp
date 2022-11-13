@@ -17,9 +17,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     $sql = "Select * from users where username='$username' limit 1";
-    $result = $conn->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
-    $result->execute();
-    $num = $result->rowCount();
+    try {
+        $result = $conn->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
+        $result->execute();
+        $num = $result->rowCount();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
 
     // This sql query is use to check if
     // the username is already present
