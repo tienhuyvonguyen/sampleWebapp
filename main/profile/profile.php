@@ -1,7 +1,4 @@
-<?php
-include "./auth/session.php";
-?>
-<!-- simple welcome page in php -->
+
 <!DOCTYPE html>
 <html lang="en">
 
