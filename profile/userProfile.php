@@ -53,7 +53,7 @@ try {
     </div>
   </div>
   <br>
-  <!-- display premium  -->
+  <!--  premium  -->
   <h2>
     <center>Premium Tier: <?php echo htmlspecialchars($premium) ?></center>
     <center><small class="text-muted d-sm-table-cell">Premium expire date: <?php echo htmlspecialchars($preExpireDate) ?></small></center>
@@ -64,7 +64,7 @@ try {
     <center>Balance: <?php echo htmlspecialchars($balance) ?> ฿฿฿</center>
   </h2>
   <!-- top up balance -->
-  <form action="../auth/topup.php" method="POST">
+  <form action="topup.php" method="POST">
     <center>
       <input type="number" name="topup" placeholder="Top up amount of ฿฿฿">
       <button type="submit" name="submit">Top up</button>
