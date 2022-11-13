@@ -11,32 +11,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mypassword = $_POST['password'];
     $capt1 = $_POST["vercode"];
     $capt2 = $_SESSION["vercode"];
-
     // $hash = password_hash(
     //     $mypassword,
     //     PASSWORD_DEFAULT
     // );
 
-    $sql = "SELECT * FROM users WHERE username = '$myusername' and userPassword = '$mypassword'";
-    $result = $conn->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
-    $result->execute();
-    $num = $result->rowCount();
-    //captcha variables
-
+    $sql = "SELECT * FROM users WHERE username = :myusername and userPassword = :mypassword";
+    try {
+        $result = $conn->prepare($sql);
+        $result->bindParam(':myusername', $myusername, PDO::PARAM_STR);
+        $result->bindParam(':mypassword', $mypassword, PDO::PARAM_STR);
+        $result->execute();
+        $num = $result->rowCount();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
     //   If result matched $myusername and $mypassword, table row must be 1 row & check captcha
     if ($capt1 != $capt2 or $capt2 == '') {
         $showError = "Invalid Captcha";
     } else if ($num == 1) {
         if (!empty($_POST["remember"])) {
-            //COOKIES for username
-            setcookie("user_login", htmlspecialchars($_POST["username"]), time() + (86400 * 7));
+            //COOKIES for username set httpdonly
+            setcookie("user_login", htmlspecialchars($_POST["username"]), time() + (86400 * 7),  NULL, NULL, NULL, TRUE); // 86400 = 1 day
             //COOKIES for password
-            setcookie("userpassword", htmlspecialchars($_POST["password"]), time() + (86400 * 7));
-        } else {
+            setcookie("user_password", htmlspecialchars($_POST["password"]), time() + (86400 * 7),  NULL, NULL, NULL, TRUE);
+        } else { 
             if (isset($_COOKIE["user_login"])) {
-                setcookie("user_login", "");
+                setcookie("user_login", "", NULL, NULL, NULL, NULL, TRUE);
                 if (isset($_COOKIE["userpassword"])) {
-                    setcookie("userpassword", "");
+                    setcookie("userpassword", "", NULL, NULL, NULL, NULL, TRUE);
                 }
             }
         }

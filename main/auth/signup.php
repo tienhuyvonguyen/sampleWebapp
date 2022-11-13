@@ -16,9 +16,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
 
 
-    $sql = "Select * from users where username='$username' limit 1";
+    $sql = "Select * from users where username= :username limit 1";
     try {
-        $result = $conn->prepare($sql, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
+        $result = $conn->prepare($sql);
+        $result->bindParam(':username', $username, PDO::PARAM_STR);
         $result->execute();
         $num = $result->rowCount();
     } catch (PDOException $e) {
@@ -29,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // the username is already present
     // or not in our Database
     if ($num == 0) {
+        // deepcode ignore PhpSameEvalBinaryExpressiontrue: Accepted
         if (($password == $cpassword) && $exists == false) {
 
             // $hash = password_hash(
@@ -38,11 +40,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Password Hashing is used here.
             $sql = "INSERT INTO `users` ( `username`,
-				`userPassword`, `userEmail`) VALUES ('$username',
-				'$password', '$email')";
-
-            $result = $conn->query($sql);
-
+				`userPassword`, `userEmail`) VALUES (:username, :password, :email)";
+            try {
+                $result = $conn->prepare($sql);
+                $result->bindParam(':username', $username, PDO::PARAM_STR);
+                $result->bindParam(':password', $password, PDO::PARAM_STR);
+                $result->bindParam(':email', $email, PDO::PARAM_STR);
+                $result->execute();
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
             if ($result) {
                 $showAlert = true;
             }
