@@ -2,7 +2,7 @@
 
 $showError = false;
 
-require("../dbConnect.php");
+require("../db/dbConnect.php");
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             setcookie("user_login", htmlspecialchars($_POST["username"]), time() + (86400 * 7),  NULL, NULL, NULL, TRUE); // 86400 = 1 day
             //COOKIES for password
             setcookie("user_password", htmlspecialchars($_POST["password"]), time() + (86400 * 7),  NULL, NULL, NULL, TRUE);
-        } else { 
+        } else {
             if (isset($_COOKIE["user_login"])) {
                 setcookie("user_login", "", NULL, NULL, NULL, NULL, TRUE);
                 if (isset($_COOKIE["userpassword"])) {
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
         $_SESSION['login_user'] = $myusername;
-        header("location: ../profile/profile.php");
+        header("location: ../profile/userProfile.php");
     } else {
         $showError = "Your Login Name or Password is invalid";
     }
