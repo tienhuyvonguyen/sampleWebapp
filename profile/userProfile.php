@@ -1,5 +1,5 @@
 <?php
-include "../auth/session.php";
+require_once("../auth/session.php");
 $sql = "SELECT * FROM users WHERE username = :username";
 try {
   $result = $conn->prepare($sql);
@@ -41,25 +41,35 @@ try {
 
 <body>
   <!-- welcome -->
-  <h1>Welcome <?php echo "<em style=color:red> $login_session </em>" ?> to the profile page</h1>
+  <h1>
+    <center>Welcome <?php echo "<em style=color:red> $login_session </em>" ?> to the profile page</center>
+  </h1>
   <!-- logout -->
   <div class="container">
     <div class="row">
       <div class="col">
-        <a href="../auth/logout.php" class="btn btn-primary">Logout</a>
+        <a href="../auth/logout.php" class="btn btn-primary float-lg-right ">Logout</a>
       </div>
     </div>
   </div>
   <br>
   <!-- display premium tier -->
-  <h2>Premium Tier: <?php echo htmlspecialchars($premium) ?></h2>
-  <h2>Premium Expired: <?php echo htmlspecialchars($preExpireDate) ?></h2>
+  <h2>
+    <center>Premium Tier: <?php echo htmlspecialchars($premium) ?></center>
+  </h2>
+  <h2>
+    <center>Premium Expired: <?php echo htmlspecialchars($preExpireDate) ?></center>
+  </h2>
   <!-- display balance -->
-  <h2>Balance: <?php echo htmlspecialchars($balance) ?> ฿฿฿</h2>
+  <h2>
+    <center>Balance: <?php echo htmlspecialchars($balance) ?> ฿฿฿</center>
+  </h2>
   <!-- top up balance -->
   <form action="../auth/topup.php" method="POST">
-    <input type="number" name="topup" placeholder="Top up amount of ฿฿฿">
-    <button type="submit" name="submit">Top up</button>
+    <center>
+      <input type="number" name="topup" placeholder="Top up amount of ฿฿฿">
+      <button type="submit" name="submit">Top up</button>
+    </center>
   </form>
 
   <!-- show user informations from database -->
