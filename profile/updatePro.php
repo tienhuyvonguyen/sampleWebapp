@@ -1,8 +1,5 @@
-<!-- update profile -->
 <?php
-// include database connection
-include '../config/database.php';
-// include session
+include '../db/dbConnect.php';
 include '../auth/session.php';
 // check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

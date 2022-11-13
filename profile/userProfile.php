@@ -17,6 +17,7 @@ try {
     $avatar_path = $row['avatar'];
     $balance = $row['balance'];
     $premium = $row['premiumTier'];
+    $preExpireDate = $row['premireExpire'];
   }
 } catch (PDOException $e) {
   echo "Error: " . $e->getMessage();
@@ -39,6 +40,7 @@ try {
 </head>
 
 <body>
+  <!-- welcome -->
   <h1>Welcome <?php echo "<em style=color:red> $login_session </em>" ?> to the profile page</h1>
   <!-- logout -->
   <div class="container">
@@ -51,6 +53,7 @@ try {
   <br>
   <!-- display premium tier -->
   <h2>Premium Tier: <?php echo htmlspecialchars($premium) ?></h2>
+  <h2>Premium Expired: <?php echo htmlspecialchars($preExpireDate) ?></h2>
   <!-- display balance -->
   <h2>Balance: <?php echo htmlspecialchars($balance) ?> ฿฿฿</h2>
   <!-- top up balance -->
