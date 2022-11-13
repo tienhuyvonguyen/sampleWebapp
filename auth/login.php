@@ -137,11 +137,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <!-- captcha -->
             <div class="form-group small clearfix">
-                <label class="checkbox-inline">Verification Code</label>
+                <label class="checkbox-inline">Captcha</label>
                 <img src="captcha.php">
             </div>
             <div class="form-group">
-                <input type="text" name="vercode" class="form-control" placeholder="Verfication Code" required="required">
+                <input type="text" name="vercode" class="form-control" placeholder="Captcha" required="required">
             </div>
             <!-- captcha -->
 
