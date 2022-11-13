@@ -1,39 +1,36 @@
 <?php
-include '../db/dbConnect.php';
-include '../auth/session.php';
-// check if form was submitted
+include_once('../auth/session.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    try {
+    // update profile
+    $password = $_POST['password'];
+    $cpassword = $_POST['cpassword'];
+    // check if password match
+    if ($password == $cpassword) {
         // update query
         $query = "UPDATE users
                     SET
-                        password = :password,
+                        userEmail = :email,
+                        userPassword = :password,
+                        phone = :phone,
                         firstname = :firstname,
-                        lastname = :lastname,
-                        address = :address
+                        lastname = :lastname
                     WHERE username = :username";
         // prepare query for execution
-        $stmt = $con->prepare($query);
-        // posted values
-        $password = htmlspecialchars(strip_tags($_POST['password']));
-        $firstname = htmlspecialchars(strip_tags($_POST['firstname']));
-        $lastname = htmlspecialchars(strip_tags($_POST['lastname']));
-        $address = htmlspecialchars(strip_tags($_POST['address']));
+        $stmt = $conn->prepare($query);
         // bind the parameters
+        $stmt->bindParam(':email', $_POST['email']);
         $stmt->bindParam(':password', $password);
-        $stmt->bindParam(':firstname', $firstname);
-        $stmt->bindParam(':lastname', $lastname);
-        $stmt->bindParam(':address', $address);
+        $stmt->bindParam(':phone', $_POST['phone']);
+        $stmt->bindParam(':firstname', $_POST['firstname']);
+        $stmt->bindParam(':lastname', $_POST['lastname']);
         $stmt->bindParam(':username', $login_session);
         // Execute the query
         if ($stmt->execute()) {
-            echo "<div class='alert alert-success'>Record was updated.</div>";
+            echo "<script>alert('Update successfully!');window.location.href='userProfile.php';</script>";
         } else {
-            echo "<div class='alert alert-danger'>Unable to update record. Please try again.</div>";
+            echo "<script>alert('Update failed!');window.location.href='userProfile.php';</script>";
         }
-    }
-    // show error
-    catch (PDOException $exception) {
-        die('ERROR: ' . $exception->getMessage());
+    } else {
+        echo "<script>alert('Password not match');window.location.href='userProfile.php';</script>";
     }
 }

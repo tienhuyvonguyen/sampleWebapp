@@ -56,9 +56,8 @@ try {
   <!-- display premium  -->
   <h2>
     <center>Premium Tier: <?php echo htmlspecialchars($premium) ?></center>
-  </h2>
-  <h2>
-    <center>Premium Expired: <?php echo htmlspecialchars($preExpireDate) ?></center>
+    <center><small class="text-muted d-sm-table-cell">Premium expire date: <?php echo htmlspecialchars($preExpireDate) ?></small></center>
+    <center><a href="#" class="btn small">Click here to upgrade</a></center>
   </h2>
   <!-- display balance -->
   <h2>
@@ -104,31 +103,31 @@ try {
 
       <div class="form-group">
         <label>Firstname</label>
-        <input type="text" class="form-control" name="firstname" required="required" value="<?php echo  htmlspecialchars($firstname) ?>" />
+        <input type="text" class="form-control" id="firstname" name="firstname"  value="<?php echo  htmlspecialchars($firstname) ?>" />
       </div>
 
       <div class="form-group">
         <label>Lastname</label>
-        <input type="text" class="form-control" name="lastname" required="required" value="<?php echo  htmlspecialchars($lastname) ?>" />
+        <input type="text" class="form-control" id="lastname" name="lastname"  value="<?php echo  htmlspecialchars($lastname) ?>" />
       </div>
 
       <div class="form-group">
         <label>Credit Card</label>
-        <input type="text" class="form-control" name="address" required="required" value="<?php echo  htmlspecialchars($creditCard) ?>" />
+        <input type="text" class="form-control" id="creditCard" name="card"  value="<?php echo  htmlspecialchars($creditCard) ?>" />
       </div>
 
       <div class="form-group">
         <label>Email</label>
-        <input type="text" class="form-control" name="address" required="required" value="<?php echo  htmlspecialchars($userEmail) ?>" />
+        <input type="text" class="form-control" id="email" name="email" required="required" value="<?php echo  htmlspecialchars($userEmail) ?>" />
       </div>
 
       <div class="form-group">
         <label>Phone</label>
-        <input type="text" class="form-control" name="address" required="required" value="<?php echo  htmlspecialchars($phone) ?>" />
+        <input type="text" class="form-control" id="phone" name="phone" required="required" value="<?php echo  htmlspecialchars($phone) ?>" />
       </div>
 
       <center><button class="btn btn-primary" name="save">Save</button></center>
-
+  
     </form>
 
   </div>
