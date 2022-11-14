@@ -18,6 +18,7 @@ try {
     $balance = $row['balance'];
     $premium = $row['premiumTier'];
     $preExpireDate = $row['premireExpire'];
+    $preExpireDate = date("d-m-Y", strtotime($preExpireDate));
   }
 } catch (PDOException $e) {
   echo "Error: " . $e->getMessage();
