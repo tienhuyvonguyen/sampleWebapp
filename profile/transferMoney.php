@@ -26,6 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $cre_Cvv = substr($row["creditCard"], -3);
+            if ($cre_Cvv == null) {
+                echo "<script>alert('You have no credit card! Please update it to use this function!');window.location.href='userProfile.php';</script>";
+            }
             $account_balance = $row["balance"];
             echo $account_balance;
             if ($account_balance < $amountToSend) { //check sender balance

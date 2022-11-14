@@ -54,15 +54,13 @@ try {
     </div>
   </div>
   <br>
-  <!-- transaction -->
   <div class="container">
     <div class="row">
       <div class="col">
-        <a href="./transaction.php" class="btn btn-primary float-lg-right ">Send Money</a>
+        <a href="../main.php" class="btn btn-primary float-lg-right ">Main menu</a>
       </div>
     </div>
   </div>
-  <br>
   <!--  premium  -->
   <h2>
     <center>Premium Tier: <?php echo htmlspecialchars($premium) ?></center>
@@ -75,12 +73,27 @@ try {
   </h2>
   <!-- top up balance -->
   <form action="topup.php" method="POST">
+    <!-- amount -->
     <center>
-      <input type="number" name="topup" placeholder="Top up amount of ฿฿฿" required="required" min="0" step="0.01">
-      <button type="submit" name="submit">Top up</button>
+      <input type="number" id="topup" name="topup" placeholder="Top up amount of ฿฿฿" required="required" min="0" step="0.01">
+    </center>
+    <br>
+    <!-- CVV -->
+    <center>
+      <input type="number" id="cvv" name="cvv" placeholder="CVV" required="required" step="000" min="0" max="999">
+      <button type="submit" name="submit">Confirm</button>
     </center>
   </form>
   <!-- top up balance -->
+  <!-- transaction -->
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <a href="./transaction.php" class="btn btn-primary float-lg-right ">Send Money</a>
+      </div>
+    </div>
+  </div>
+  <!-- transaction -->
   <div class="container my-4 ">
     <!-- show user informations from database -->
     <form method="POST" action="./updateProfile.php">
@@ -130,12 +143,12 @@ try {
 
       <div class="form-group">
         <label>Email</label>
-        <input type="text" class="form-control" id="email" name="email" required="required" value="<?php echo  htmlspecialchars($userEmail) ?>" />
+        <input type="text" class="form-control" id="email" name="email"  value="<?php echo  htmlspecialchars($userEmail) ?>" />
       </div>
 
       <div class="form-group">
         <label>Phone</label>
-        <input type="text" class="form-control" id="phone" name="phone" required="required" value="<?php echo  htmlspecialchars($phone) ?>" />
+        <input type="text" class="form-control" id="phone" name="phone"  value="<?php echo  htmlspecialchars($phone) ?>" />
       </div>
 
       <center><button class="btn btn-primary" name="save">Save</button></center>

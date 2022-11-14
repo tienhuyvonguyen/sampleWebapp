@@ -1,5 +1,11 @@
 <?php
 require("../auth/session.php");
+$sql = "select * from users where username = :username";
+$stmt = $conn->prepare($sql);
+$stmt->bindParam(':username', $login_session);
+$stmt->execute();
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+$balance = $row['balance'];
 ?>
 
 <!DOCTYPE html>
@@ -20,27 +26,35 @@ require("../auth/session.php");
 
 <body>
     <!-- welcome -->
-    <br>
-    <small>User: <?php echo "<em style=color:red> $login_session </em>" ?></small>
     <h1>
         <center>Transaction page</center>
     </h1>
-    <!-- transaction -->
-    <form action="./transferMoney.php" method="POST">
-        <center>
-            <input type="text" id="receiver" name="receiver" placeholder="Receiver">
-            <input type="number" id="cvv" name="cvv" placeholder="CVV number">
-            <!-- last 3 digits -->
-            <input type="number" id="amount" name="amount" placeholder="Amount of ฿฿฿ to send" step="0.01" min="0">
-            <button type="submit" name="submit">Send</button>
-        </center>
-    </form>
     <!-- Back to main menu -->
     <div class="container">
         <div class="row">
             <div class="col">
                 <a href="../main.php" class="btn btn-primary float-lg-right ">Main menu</a>
+                <medium>User: <?php echo "<em style=color:red> $login_session </em>" ?></medium> <br>
+                <medium>Balance: <?php echo "<em style=color:red> $balance </em>" ?>฿฿฿</medium>
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <a href="../profile/userProfile.php" class="btn btn-primary float-lg-right ">Profile</a>
+            </div>
+        </div>
+    </div>
+    <!-- transaction -->
+    <form action="./transferMoney.php" method="POST">
+        <center>
+            <input type="text" id="receiver" name="receiver" placeholder="Receiver">
+            <input type="number" id="cvv" name="cvv" placeholder="CVV" step="000" min="0" max="999">
+            <!-- last 3 digits -->
+            <input type="number" id="amount" name="amount" placeholder="Amount of ฿฿฿ to send" step="0.01" min="0">
+            <button type="submit" name="submit">Send</button>
+        </center>
+    </form>
+
 </body>
