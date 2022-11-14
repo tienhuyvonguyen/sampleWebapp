@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $login_session;
     $password = $_POST['password'];
     $cpassword = $_POST['cpassword'];
-
+    $avatar_path->avaHandle . uploadAvatar($username);
     // // handle avatar upload
     // $avatar = $_FILES['avatar'];
     // $avatar_name = $avatar['name'];
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // } else {
     //     echo "<script>alert('You cannot upload files of this type!');window.location.href='userProfile.php';</script>";
     // }
-    
+
     try {
 
         if (isset($password) && isset($cpassword) && $password != "" && $cpassword != "") {
@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':firstname', $_POST['firstname']);
             $stmt->bindParam(':lastname', $_POST['lastname']);
             $stmt->bindParam(':card', $_POST['creditCard']);
-            
+
             $stmt->bindParam(':avatar', $avatar_path);
             $stmt->bindParam(':username', $username);
             $stmt->execute();
