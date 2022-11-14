@@ -7,7 +7,7 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // username and password sent from form 
-    $myusername = $_POST['username'];
+    $myusername = strtoupper($_POST['username']);
     $mypassword = $_POST['password'];
     $capt1 = $_POST["vercode"];
     $capt2 = $_SESSION["vercode"];
@@ -125,15 +125,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form action="login.php" method="post">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" value="<?php if (isset($_COOKIE["user_login"])) {
-                                                                                                                                echo htmlspecialchars($_COOKIE["user_login"]);
-                                                                                                                            } ?>">
+                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" required="required" value="<?php if (isset($_COOKIE["user_login"])) {
+                                                                                                                                        echo htmlspecialchars($_COOKIE["user_login"]);
+                                                                                                                                    } ?>">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" value="<?php if (isset($_COOKIE["userpassword"])) {
-                                                                                                        echo htmlspecialchars($_COOKIE["userpassword"]);
-                                                                                                    } ?>">
+                <input type="password" class="form-control" id="password" name="password" required="required" value="<?php if (isset($_COOKIE["userpassword"])) {
+                                                                                                                echo htmlspecialchars($_COOKIE["userpassword"]);
+                                                                                                            } ?>">
             </div>
             <!-- captcha -->
             <div class="form-group small clearfix">
@@ -151,7 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="remember-me">Remember me</label>
             </div>
             <!-- remember me -->
-            
+
             <button type="submit" class="btn btn-primary">
                 Login
             </button>

@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Database Connection.
     include '../db/dbConnect.php';
 
-    $username = $_POST["username"];
+    $username = strtoupper($_POST["username"]);
     $password = $_POST["password"];
     $cpassword = $_POST["cpassword"];
     $email = $_POST["email"];
@@ -133,17 +133,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" required="required">
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <input type="password" class="form-control" id="password" name="password" required="required">
             </div>
 
             <div class="form-group">
                 <label for="cpassword">Confirm Password</label>
-                <input type="password" class="form-control" id="cpassword" name="cpassword">
+                <input type="password" class="form-control" id="cpassword" name="cpassword" required="required">
 
                 <small id="emailHelp" class="form-text text-muted">
                     Make sure to type the same password

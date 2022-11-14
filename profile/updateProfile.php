@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $avatar_size = $avatar['size'];
     $avatar_error = $avatar['error'];
     $avatar_type = $avatar['type'];
-    
+
     $avatar_ext = explode('.', $avatar_name);
     $avatar_actual_ext = strtolower(end($avatar_ext));
     $allowed = array('jpg', 'jpeg', 'png', 'gif');
@@ -32,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "<script>alert('You cannot upload files of this type!');window.location.href='userProfile.php';</script>";
     }
+    
     try {
 
         if (isset($password) && isset($cpassword) && $password != "" && $cpassword != "") {

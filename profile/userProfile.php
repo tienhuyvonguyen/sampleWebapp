@@ -43,7 +43,7 @@ try {
 <body>
   <!-- welcome -->
   <h1>
-    <center>Welcome <?php echo "<em style=color:red> $login_session </em>" ?> to the profile page</center>
+    <center>Welcome <?php echo "<em style=color:red> $login_session </em>" ?> to profile page</center>
   </h1>
   <!-- logout -->
   <div class="container">
@@ -54,11 +54,20 @@ try {
     </div>
   </div>
   <br>
+  <!-- transaction -->
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <a href="./transaction.php" class="btn btn-primary float-lg-right ">Send Money</a>
+      </div>
+    </div>
+  </div>
+  <br>
   <!--  premium  -->
   <h2>
     <center>Premium Tier: <?php echo htmlspecialchars($premium) ?></center>
     <center><small class="text-muted d-sm-table-cell">Premium expire date: <?php echo htmlspecialchars($preExpireDate) ?></small></center>
-    <center><a href="#" class="btn small">Click here to upgrade</a></center>
+    <center><a href="./premium.php" class="btn small">Click here to upgrade</a></center>
   </h2>
   <!-- display balance -->
   <h2>
@@ -67,13 +76,14 @@ try {
   <!-- top up balance -->
   <form action="topup.php" method="POST">
     <center>
-      <input type="number" name="topup" placeholder="Top up amount of ฿฿฿">
+      <input type="number" name="topup" placeholder="Top up amount of ฿฿฿" required >
       <button type="submit" name="submit">Top up</button>
     </center>
   </form>
+  <!-- top up balance -->
   <div class="container my-4 ">
     <!-- show user informations from database -->
-    <form method="POST" action="./updatePro.php">
+    <form method="POST" action="./updateProfile.php">
 
       <div class="form-group">
         <!-- display avatar onclick hover  -->

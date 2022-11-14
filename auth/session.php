@@ -7,7 +7,7 @@ $ses_sql = $conn->prepare($sql);
 $ses_sql->bindParam(':user_check', $user_check);
 $ses_sql->execute();
 $row = $ses_sql->fetch(PDO::FETCH_ASSOC);
-$login_session = $row['username'];
+$login_session = strtoupper($row['username']);
 if (!isset($login_session)) {
     header("location: ./login.php");
     die();

@@ -20,11 +20,13 @@ session_start();
 </head>
 
 <body>
-	<h1>
-		<center>Index Page</center>
-	</h1>
-	<center><a class="btn btn-primary" href="./auth/signup.php">Sign Up</a></center> <br>
-	<center><a class="btn btn-primary" href="./auth/login.php">Login</a></center>
+	<div class="container my-4  ">
+		<h1>
+			<center>Index Page</center>
+		</h1>
+		<center><a class="btn btn-primary" href="./auth/signup.php">Sign Up</a></center> <br>
+		<center><a class="btn btn-primary" href="./auth/login.php">Login</a></center>
+	</div>
 </body>
 
 </html>
