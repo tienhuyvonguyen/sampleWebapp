@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $wallet = $wallet + $balance;
         if ($wallet < 0) {
             $wallet = 0;
-            echo "<script>alert('Ha you donkey!');window.location.href='userProfile.php';</script>";
+            echo "<script>alert('Ha you fu*ing donkey!');window.location.href='userProfile.php';</script>";
         }
         // bind the parameters
         $stmt->bindParam(':balance', $wallet);

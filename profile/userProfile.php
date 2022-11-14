@@ -1,7 +1,7 @@
 <?php
 require_once("../auth/session.php");
-$sql = "SELECT * FROM users WHERE username = :username";
 try {
+  $sql = "SELECT * FROM users WHERE username = :username";
   $result = $conn->prepare($sql);
   $result->bindParam(':username', $login_session, PDO::PARAM_STR);
   $result->execute();
@@ -73,13 +73,14 @@ try {
   </form>
   <div class="container my-4 ">
     <!-- show user informations from database -->
-    <form method="POST" action="updatePro.php">
+    <form method="POST" action="./updatePro.php">
 
       <div class="form-group">
         <!-- display avatar onclick hover  -->
         <img src="<?php echo $avatar_path ?>" alt="avatar" width="100" height="100">
         <!-- onclick change avatar  using php-->
         <input type="file" name="avatar" id="avatar" accept="image/png, image/jpeg">
+
       </div>
 
       <div class="form-group">
@@ -114,7 +115,7 @@ try {
 
       <div class="form-group">
         <label>Credit Card</label>
-        <input type="text" class="form-control" id="creditCard" name="card" value="<?php echo  htmlspecialchars($creditCard) ?>" />
+        <input type="text" class="form-control" id="creditCard" name="creditCard" value="<?php echo  htmlspecialchars($creditCard) ?>" />
       </div>
 
       <div class="form-group">
