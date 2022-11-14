@@ -76,7 +76,7 @@ try {
   <!-- top up balance -->
   <form action="topup.php" method="POST">
     <center>
-      <input type="number" name="topup" placeholder="Top up amount of ฿฿฿" required >
+      <input type="number" name="topup" placeholder="Top up amount of ฿฿฿" required="required" min="0" step="0.01">
       <button type="submit" name="submit">Top up</button>
     </center>
   </form>

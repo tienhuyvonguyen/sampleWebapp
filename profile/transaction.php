@@ -1,26 +1,7 @@
 <?php
 require("../auth/session.php");
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $amount = $_POST["amount"];
-    $cvv = $_POST["cvv"];
-    $receiver = $_POST["address"];
-    $sender = $_SESSION["login_user"];
-
-    if ($amount < 0) {
-        echo "<script>alert('Amount must be positive');window.location.href='transaction.php';</script>";
-    }
-    $sql = "SELECT username from users where username = :reveiver";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':receiver', $receiver);
-    $stmt->execute();
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($row == null) {
-        echo "<script>alert('Receiver does not exist');window.location.href='transaction.php';</script>";
-    }
-}
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,11 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <center>Transaction page</center>
     </h1>
     <!-- transaction -->
-    <form action="transaction.php" method="POST">
+    <form action="./transferMoney.php" method="POST">
         <center>
-            <input type="text" id="address" name="address" placeholder="Wallet Username">
+            <input type="text" id="receiver" name="receiver" placeholder="Receiver">
             <input type="number" id="cvv" name="cvv" placeholder="CVV number">
-            <input type="number" id="amount" name="amount" placeholder="Amount of ฿฿฿ to send">
+            <!-- last 3 digits -->
+            <input type="number" id="amount" name="amount" placeholder="Amount of ฿฿฿ to send" step="0.01" min="0">
             <button type="submit" name="submit">Send</button>
         </center>
     </form>
