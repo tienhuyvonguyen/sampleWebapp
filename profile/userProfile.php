@@ -104,17 +104,17 @@ try {
 
       <div class="form-group">
         <label>Firstname</label>
-        <input type="text" class="form-control" id="firstname" name="firstname"  value="<?php echo  htmlspecialchars($firstname) ?>" />
+        <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo  htmlspecialchars($firstname) ?>" />
       </div>
 
       <div class="form-group">
         <label>Lastname</label>
-        <input type="text" class="form-control" id="lastname" name="lastname"  value="<?php echo  htmlspecialchars($lastname) ?>" />
+        <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo  htmlspecialchars($lastname) ?>" />
       </div>
 
       <div class="form-group">
         <label>Credit Card</label>
-        <input type="text" class="form-control" id="creditCard" name="card"  value="<?php echo  htmlspecialchars($creditCard) ?>" />
+        <input type="text" class="form-control" id="creditCard" name="card" value="<?php echo  htmlspecialchars($creditCard) ?>" />
       </div>
 
       <div class="form-group">
@@ -128,7 +128,7 @@ try {
       </div>
 
       <center><button class="btn btn-primary" name="save">Save</button></center>
-  
+
     </form>
 
   </div>
