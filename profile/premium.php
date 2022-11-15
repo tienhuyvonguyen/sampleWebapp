@@ -6,6 +6,17 @@ $stmt->bindParam(':username', $login_session);
 $stmt->execute();
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $balance = $row['balance'];
+$tier = $_GET['tier'];
+switch ($tier) {
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    default:
+        break;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,9 +40,12 @@ $balance = $row['balance'];
         <center>Premium register</center>
     </h1>
     <div class="container">
-        <medium>User: <?php echo "<em style=color:red> $login_session </em>" ?></medium>
+        <!-- santinize pls -->
+        <medium>User: <strong style=color:red><?php echo htmlspecialchars($login_session) ?></strong></medium>
         <br>
-        <medium>Balance: <?php echo "<em style=color:red> $balance </em>" ?> ฿฿฿</medium>
+        <medium>Tier: <em style=color:red><?php echo htmlspecialchars($tier) ?></em></medium>
+        <br>
+        <medium>Balance: <em style=color:red><?php echo htmlspecialchars($balance) ?></em> ฿฿฿</medium>
     </div>
     <!-- Back to main menu -->
     <div class="container">

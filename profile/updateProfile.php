@@ -2,22 +2,35 @@
 include('../auth/session.php');
 include('../db/dbConnect.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $login_session;
+    $username = strtoupper($login_session);
     $password = $_POST['password'];
     $cpassword = $_POST['cpassword'];
     try {
-        $sql = "SELECT * FROM users WHERE username = ':username'";
+        $sql = "SELECT * FROM users WHERE username = :username";
         $result = $conn->prepare($sql);
         $result->bindParam(':username', $username);
         $result->execute();
         $row = $result->fetch(PDO::FETCH_ASSOC);
-        //working right here
+
+        // working right here LOGIC error
         $oldMail = $row['userEmail'];
+        $oldMail != $_POST['email'] && $_POST['email'] != "" ? $email = $_POST['email'] : $email = $oldMail;
         $oldPhone = $row['phone'];
-        $ollFirstName = $row['firstName'];
-        $oldLastName = $row['lastName'];
+        $oldPhone != $_POST['phone'] ? $phone = $_POST['phone'] : $phone = $oldPhone;
+        $ollFirstName = $row['firstname'];
+        $ollFirstName != $_POST['firstName'] ? $firstName = $_POST['firstName'] : $firstName = $ollFirstName;
+        $oldLastName = $row['lastname'];
+        $oldLastName != $_POST['lastName'] ? $lastName = $_POST['lastName'] : $lastName = $oldLastName;
         $oldAvatar = $row['avatar'];
+        $oldAvatar != $_POST['avatar'] ? $avatar = $_POST['avatar'] : $avatar = $oldAvatar;
         $oldCreditCard = $row['creditCard'];
+        $oldCreditCard != $_POST['creditCard'] ? $creditCard = $_POST['creditCard'] : $creditCard = $oldCreditCard;
+
+
+
+
+
+        
         if (isset($password) && isset($cpassword) && $password != "" && $cpassword != "") {
             $sql = "select userPassword from users where username = :username";
             $stmt = $conn->prepare($sql);
@@ -36,13 +49,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     avatar =  :avatar
                                 WHERE username = :username";
                 $stmt = $conn->prepare($sql);
-                $stmt->bindParam(':email', $_POST['email']);
+                $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':password', $password);
-                $stmt->bindParam(':phone', $_POST['phone']);
-                $stmt->bindParam(':firstname', $_POST['firstname']);
-                $stmt->bindParam(':lastname', $_POST['lastname']);
-                $stmt->bindParam(':card', $_POST['creditCard']);
-                $stmt->bindParam(':avatar', $avatar_path);
+                $stmt->bindParam(':phone', $phone);
+                $stmt->bindParam(':firstname', $firstName);
+                $stmt->bindParam(':lastname', $lastName);
+                $stmt->bindParam(':card', $creditCard);
+                $stmt->bindParam(':avatar', $avatar);
                 $stmt->bindParam(':username', $username);
                 $stmt->execute();
                 echo "<script>alert('Profile updated successfully!1');window.location.href='userProfile.php';</script>";
@@ -53,21 +66,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         } elseif ($password == "" && $cpassword == "") {
             $sql = "UPDATE users SET
-                                userEmail = :email,
-                                phone = :phone,
-                                firstname = :firstname,
-                                lastname = :lastname,
-                                creditCard = :card,
-                                avatar =  :avatar
-                            WHERE username = :username";
+                                    userEmail = :email,
+                                    phone = :phone,
+                                    firstname = :firstname,
+                                    lastname = :lastname,
+                                    creditCard = :card,
+                                    avatar =  :avatar
+                                WHERE username = :username";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':email', $_POST['email']);
-            $stmt->bindParam(':phone', $_POST['phone']);
-            $stmt->bindParam(':firstname', $_POST['firstname']);
-            $stmt->bindParam(':lastname', $_POST['lastname']);
-            $stmt->bindParam(':card', $_POST['creditCard']);
-
-            $stmt->bindParam(':avatar', $avatar_path);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':phone', $phone);
+            $stmt->bindParam(':firstname', $firstName);
+            $stmt->bindParam(':lastname', $lastName);
+            $stmt->bindParam(':card', $creditCard);
+            $stmt->bindParam(':avatar', $avatar);
             $stmt->bindParam(':username', $username);
             $stmt->execute();
             echo "<script>alert('Profile updated successfully!2');window.location.href='userProfile.php';</script>";

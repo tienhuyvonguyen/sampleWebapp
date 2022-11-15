@@ -65,7 +65,7 @@ try {
   <h2>
     <center>Premium Tier: <?php echo htmlspecialchars($premium) ?></center>
     <center><small class="text-muted d-sm-table-cell">Premium expire date: <?php echo htmlspecialchars($preExpireDate) ?></small></center>
-    <center><a href="./premium.php" class="btn small">Click here to upgrade</a></center>
+    <center><a href="./premium.php?tier=<?php echo htmlspecialchars($premium) ?>" class="btn small">Click here to upgrade</a></center>
   </h2>
   <!-- display balance -->
   <h2>
@@ -99,11 +99,8 @@ try {
     <form method="POST" action="./updateProfile.php">
 
       <div class="form-group">
-        <!-- display avatar onclick hover  -->
         <img src="<?php echo $avatar_path ?>" alt="avatar" width="100" height="100">
-        <!-- onclick change avatar  using php-->
         <input type="file" name="avatar" id="avatar" accept="image/png, image/jpeg">
-
       </div>
 
       <div class="form-group">
@@ -143,12 +140,12 @@ try {
 
       <div class="form-group">
         <label>Email</label>
-        <input type="text" class="form-control" id="email" name="email"  value="<?php echo  htmlspecialchars($userEmail) ?>" />
+        <input type="text" class="form-control" id="email" name="email" value="<?php echo  htmlspecialchars($userEmail) ?>" />
       </div>
 
       <div class="form-group">
         <label>Phone</label>
-        <input type="text" class="form-control" id="phone" name="phone"  value="<?php echo  htmlspecialchars($phone) ?>" />
+        <input type="text" class="form-control" id="phone" name="phone" value="<?php echo  htmlspecialchars($phone) ?>" />
       </div>
 
       <center><button class="btn btn-primary" name="save">Save</button></center>
