@@ -34,8 +34,8 @@ $balance = $row['balance'];
         <div class="row">
             <div class="col">
                 <a href="../main.php" class="btn btn-primary float-lg-right ">Main menu</a>
-                <medium>User: <?php echo "<em style=color:red> $login_session </em>" ?></medium> <br>
-                <medium>Balance: <?php echo "<em style=color:red> $balance </em>" ?>฿฿฿</medium>
+                <medium>User: <?php echo htmlspecialchars("<em style=color:red> $login_session </em>") ?></medium> <br>
+                <medium>Balance: <?php echo htmlspecialchars("<em style=color:red> $balance </em>") ?>฿฿฿</medium>
             </div>
         </div>
     </div>

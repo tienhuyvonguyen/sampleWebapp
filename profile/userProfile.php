@@ -1,9 +1,10 @@
 <?php
 require_once("../auth/session.php");
+$username = strtoupper($login_session);
 try {
   $sql = "SELECT * FROM users WHERE username = :username";
   $result = $conn->prepare($sql);
-  $result->bindParam(':username', $login_session, PDO::PARAM_STR);
+  $result->bindParam(':username', $username, PDO::PARAM_STR);
   $result->execute();
   $num = $result->rowCount();
   if ($num == 1) {
@@ -43,7 +44,7 @@ try {
 <body>
   <!-- welcome -->
   <h1>
-    <center>Welcome <?php echo "<em style=color:red> $login_session </em>" ?> to profile page</center>
+    <center>Welcome <?php echo "<em style=color:red> $username </em>" ?> to profile page</center>
   </h1>
   <!-- logout -->
   <div class="container">
@@ -104,10 +105,9 @@ try {
       </div>
 
       <div class="form-group">
-        <!-- can not change -->
         <label for="username">Username</label>
         <small id="emailHelp" class="form-text text-muted"> Unique </small>
-        <input type="text" class="form-control" id="username" name="username" value="<?php echo  htmlspecialchars($login_session) ?>" readonly>
+        <input type="text" class="form-control" id="username" name="username" value="<?php echo  htmlspecialchars($username) ?>" readonly>
       </div>
 
       <div class="form-group">
