@@ -133,18 +133,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" required="required">
+                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" required="required" max="12">
             </div>
 
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required="required">
+                <input type="password" class="form-control" id="password" name="password" required="required" max="18">
             </div>
 
             <div class="form-group">
                 <label for="cpassword">Confirm Password</label>
-                <input type="password" class="form-control" id="cpassword" name="cpassword" required="required">
-
+                <input type="password" class="form-control" id="cpassword" name="cpassword" required="required" max="18">
                 <small id="emailHelp" class="form-text text-muted">
                     Make sure to type the same password
                 </small>
@@ -152,7 +151,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" max="50">
             </div>
             <button type="submit" class="btn btn-primary">
                 Signup

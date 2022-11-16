@@ -1,5 +1,6 @@
 <?php
 require_once("../auth/session.php");
+session_start();
 $username = strtoupper($login_session);
 try {
   $sql = "SELECT * FROM users WHERE username = :username";
@@ -20,6 +21,9 @@ try {
     $premium = $row['premiumTier'];
     $preExpireDate = $row['premireExpire'];
     $preExpireDate = date("d-m-Y", strtotime($preExpireDate));
+    if ($preExpireDate == "01-01-1970") {
+      $preExpireDate = "N/A";
+    }
   }
 } catch (PDOException $e) {
   echo "Error: " . $e->getMessage();
@@ -97,13 +101,15 @@ try {
   <!-- transaction -->
   <div class="container my-4 ">
     <!-- show user informations from database -->
-    <form method="POST" action="./updateProfile.php">
-
+    <form method="post" action="./updateProfile.php" enctype="multipart/form-data" >
       <div class="form-group">
         <img src="<?php echo $avatar_path ?>" alt="avatar" width="100" height="100">
-        <input type="file" name="avatar" id="avatar" accept="image/png, image/jpeg">
+        <input type="file" name="fileToUpload" id="fileToUpload" accept="image/png, image/jpeg">
+        <input type="submit" value="Change avatar" name="submit" id="submit">
       </div>
+    </form>
 
+    <form method="POST" action="./updateProfile.php">
       <div class="form-group">
         <label for="username">Username</label>
         <small id="emailHelp" class="form-text text-muted"> Unique </small>
@@ -112,12 +118,12 @@ try {
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password">
+        <input type="password" class="form-control" id="password" name="password" max="18">
       </div>
 
       <div class="form-group">
         <label for="cpassword">Confirm Password</label>
-        <input type="password" class="form-control" id="cpassword" name="cpassword">
+        <input type="password" class="form-control" id="cpassword" name="cpassword" max="18">
         <small id="emailHelp" class="form-text text-muted">
           Make sure to type the same password
         </small>
@@ -125,33 +131,31 @@ try {
 
       <div class="form-group">
         <label>Firstname</label>
-        <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo  htmlspecialchars($firstname) ?>" />
+        <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo  htmlspecialchars($firstname) ?>" max="50" />
       </div>
 
       <div class="form-group">
         <label>Lastname</label>
-        <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo  htmlspecialchars($lastname) ?>" />
+        <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo  htmlspecialchars($lastname) ?>" max="50" />
       </div>
 
       <div class="form-group">
         <label>Credit Card</label>
-        <input type="text" class="form-control" id="creditCard" name="creditCard" value="<?php echo  htmlspecialchars($creditCard) ?>" />
+        <input type="number" class="form-control" id="creditCard" name="creditCard" value="<?php echo  htmlspecialchars($creditCard) ?>" min="0" />
       </div>
 
       <div class="form-group">
         <label>Email</label>
-        <input type="text" class="form-control" id="email" name="email" value="<?php echo  htmlspecialchars($userEmail) ?>" />
+        <input type="text" class="form-control" id="email" name="email" value="<?php echo  htmlspecialchars($userEmail) ?>" max="100" />
       </div>
 
       <div class="form-group">
         <label>Phone</label>
-        <input type="text" class="form-control" id="phone" name="phone" value="<?php echo  htmlspecialchars($phone) ?>" />
+        <input type="text" class="form-control" id="phone" name="phone" value="<?php echo  htmlspecialchars($phone) ?>" min="0" />
       </div>
 
-      <center><button class="btn btn-primary" name="save">Save</button></center>
-
+      <center><button class="btn btn-primary" id="save" name="save">Save</button></center>
     </form>
-
   </div>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

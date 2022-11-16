@@ -6,7 +6,6 @@ require("../db/dbConnect.php");
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // username and password sent from form 
     $myusername = strtoupper($_POST['username']);
     $mypassword = $_POST['password'];
     $capt1 = $_POST["vercode"];
@@ -29,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //   If result matched $myusername and $mypassword, table row must be 1 row & check captcha
     if ($capt1 != $capt2 or $capt2 == '') {
         $showError = "Invalid Captcha";
-    } else if ($num == 1) {
+    } elseif ($num == 1) {
         if (!empty($_POST["remember"])) {
             //COOKIES for username set httpdonly
             setcookie("user_login", htmlspecialchars($_POST["username"]), time() + (86400 * 7),  NULL, NULL, NULL, TRUE); // 86400 = 1 day
@@ -126,14 +125,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" required="required" value="<?php if (isset($_COOKIE["user_login"])) {
-                                                                                                                                        echo htmlspecialchars($_COOKIE["user_login"]);
-                                                                                                                                    } ?>">
+                                                                                                                                                    echo htmlspecialchars($_COOKIE["user_login"]);
+                                                                                                                                                } ?>">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required="required" value="<?php if (isset($_COOKIE["userpassword"])) {
-                                                                                                                echo htmlspecialchars($_COOKIE["userpassword"]);
-                                                                                                            } ?>">
+                                                                                                                            echo htmlspecialchars($_COOKIE["userpassword"]);
+                                                                                                                        } ?>">
             </div>
             <!-- captcha -->
             <div class="form-group small clearfix">
