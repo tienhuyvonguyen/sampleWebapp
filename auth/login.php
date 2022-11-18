@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $myusername = strtoupper($_POST['username']);
     $mypassword = $_POST['password'];
     $capt1 = $_POST["vercode"];
-    $capt2 = $_SESSION["vercode"];
+    $capt2 = $_SESSION["vercode"]; //vercode is the session variable that holds the captcha code
     // $hash = password_hash(
     //     $mypassword,
     //     PASSWORD_DEFAULT
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $e->getMessage();
     }
     //   If result matched $myusername and $mypassword, table row must be 1 row & check captcha
-    if ($capt1 != $capt2 || $capt2 == '') {
+    if ($capt1 != $capt2 || $capt2 == '') { //vercode is the session variable that holds the captcha code
         $showError = "Invalid Captcha";
     } elseif ($num == 1) {
         if (!empty($_POST["remember"])) {
@@ -42,18 +42,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
         }
-        $_SESSION['login_user'] = htmlspecialchars($myusername);
+        $_SESSION['login_user'] = htmlspecialchars($myusername); // set username in session
+        $_SESSION["login_time_stamp"] = time(); //set login time
         header("location: ../profile/userProfile.php");
+    } elseif ($num == 0) {
+        $showError = "Invalid Username or Password";
     } else {
-        $showError = "Your Login Name or Password is invalid";
+        $showError = "Invalid Username or Password";
     }
-    // test in case of error
-    // if ($num == 1) {
-    //     $_SESSION['login_user'] = $myusername;
-    //     header("location: ../profile.php");
-    // } else {
-    //     $showError = "Your Login Name or Password is invalid";
-    // }
 }
 
 ?>

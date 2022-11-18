@@ -1,4 +1,3 @@
-<!-- sample user cart page -->
 <?php
 session_start();
 include('../auth/session.php');

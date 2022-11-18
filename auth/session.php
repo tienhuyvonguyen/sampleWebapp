@@ -8,7 +8,14 @@ $ses_sql->bindParam(':user_check', $user_check);
 $ses_sql->execute();
 $row = $ses_sql->fetch(PDO::FETCH_ASSOC);
 $login_session = strtoupper($row['username']);
-if (!isset($login_session)) {
+if (time() - $_SESSION["login_time_stamp"] > 600) { //subtract new timestamp from the old one
+    session_unset();
+    session_destroy();
+    header("Location: ./login.php");
+}
+if (!isset($login_session)) { //if login in session is not set
     header("location: ./login.php");
+    session_unset();
+    session_destroy();
     die();
 }
