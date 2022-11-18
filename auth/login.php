@@ -12,8 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $capt2 = $_SESSION["vercode"]; //vercode is the session variable that holds the captcha code
     // $hash = password_hash(
     //     $mypassword,
-    //     PASSWORD_DEFAULT
-    // );
+    //     PASSWORD_DEFAULT salt
+    // ); md5
 
     $sql = "SELECT * FROM users WHERE username = :myusername and userPassword = :mypassword";
     try {
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
-    //   If result matched $myusername and $mypassword, table row must be 1 row & check captcha
+    //If result matched $myusername and $mypassword, table row must be 1 row & check captcha
     if ($capt1 != $capt2 || $capt2 == '') { //vercode is the session variable that holds the captcha code
         $showError = "Invalid Captcha";
     } elseif ($num == 1) {
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $_SESSION['login_user'] = htmlspecialchars($myusername); // set username in session
         $_SESSION["login_time_stamp"] = time(); //set login time
-        header("location: ../profile/userProfile.php");
+        echo "<script>alert('Login Successful!'); window.location.href='../profile/userProfile.php';</script>";
     } elseif ($num == 0) {
         $showError = "Invalid Username or Password";
     } else {

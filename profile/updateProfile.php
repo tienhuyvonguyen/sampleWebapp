@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result->bindParam(':username', $username);
         $result->execute();
         $row = $result->fetch(PDO::FETCH_ASSOC);
-        
+
         $oldMail = $row['userEmail'];
         $newMail = ($_POST['email']);
         if ($newMail == $oldMail) {

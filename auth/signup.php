@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($result) {
                 $showAlert = true;
             }
-            header("Location: ./login.php");
+            echo "<script>alert('Sign up Successful!'); window.location.href='./login.php';</script>";
         } else {
             $showError = "Passwords do not match";
         }

@@ -14,12 +14,13 @@ try {
 
 if (isset($_POST["submit"])) {
     $target_dir  = "../uploads/avatars/";
+    $userUniq = md5($login_session); // md5 hash of the username to create a unique folder for each user
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
     if ($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
+        // echo "File is an image - " . $check["mime"] . ".";
         $uploadOk = 1;
     } else {
         echo "<script>alert('File is not an image!');window.location.href='userProfile.php';</script>";
@@ -30,7 +31,7 @@ if (isset($_POST["submit"])) {
         echo "<script>alert('Sorry, your Avatar is too large.')</script>";
         $uploadOk = 0;
     }
-    $whiteList = array('png', 'jpg', 'jpeg', 'gif');
+    $whiteList = array('png', 'jpg', 'jpeg', 'gif'); // whitelist of file types
     if (!in_array($imageFileType, $whiteList)) {
         echo "<script>alert('Sorry, only JPG, JPEG, PNG & GIF files are allowed.')</script>";
         $uploadOk = 0;
@@ -54,8 +55,7 @@ if (isset($_POST["submit"])) {
         $stmt->bindParam(':avatar', $newAvatar);
         $stmt->bindParam(':username', $login_session);
         $stmt->execute();
-        echo "<script>alert('Avatar updated successfully')</script>";
-        echo "<script>window.location.href='userProfile.php'</script>";
+        echo "<script>alert('Avatar updated successfully');window.location.href='userProfile.php';</script>";
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
