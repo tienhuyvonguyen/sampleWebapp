@@ -22,7 +22,7 @@ if (isset($_GET['tier'])) {
         header("Location: premium.php");
         die();
     }
-    $warning = "<script>window.confirm('Are you sure to sub $tier')</script>";
+    $warning = "<script>window.confirm('Are you sure to subscribe $tier')</script>";
     echo $warning;
     if ($warning) {
         $prepareBalance = $balance;
@@ -52,9 +52,9 @@ if (isset($_GET['tier'])) {
             $stmt->bindParam(':expireDate', $expireDate);
             $stmt->bindParam(':username', $username);
             $stmt->execute();
-            echo ("<script>alert('You have successfully upgraded to premium tier $tier!');window.location.href='premium.php';</script>");
+            echo "<script>alert('You have successfully upgraded to premium tier $tier!');window.location.href='premium.php';</script>";
         } elseif ($prepareBalance < $price) {
-            echo ("<script>alert('You do not have enough balance to upgrade to premium tier $tier!');window.location.href='premium.php';</script>");
+            echo "<script>alert('You do not have enough balance to upgrade to premium tier $tier!');window.location.href='premium.php';</script>";
         } else {
             // set header 500 error
             header("HTTP/1.0 500 Internal Server Error");
@@ -86,7 +86,7 @@ if (isset($_GET['tier'])) {
         <center>Premium register</center>
     </h1>
 
-    <!-- Back to main menu -->
+    <!-- anchor -->
     <div class="container">
         <div class="row">
             <div class="col">
@@ -100,7 +100,7 @@ if (isset($_GET['tier'])) {
             </div>
         </div>
     </div>
-    <!-- Show premmium options -->
+    <!--  premmium options -->
     <div class="container">
         <div class="row">
             <center>
@@ -111,7 +111,7 @@ if (isset($_GET['tier'])) {
                             <h5 class="card-title`">Premium Tier 1</h5>
                             <p class="card-text">Price: 500฿฿฿</p>
                             <p class="card-text">Expire date: 1 month</p>
-                            <p>Benefits: 0% off</p>
+                            <p>Benefits: 20% off</p>
                             <a href="./premium.php?tier= <?= $tier = 1 ?>" class="btn btn-primary">Subscribe</a>
                         </div>
                     </div>
@@ -125,7 +125,7 @@ if (isset($_GET['tier'])) {
                             <h5 class="card-title ">Premium 2</h5>
                             <p class="card-text">Price: 1000฿฿฿</p>
                             <p class="card-text">Expire date: 6 months</p>
-                            <p>Benefits: </p>
+                            <p>Benefits: 30% off </p>
                             <a href="./premium.php?tier=<?= $tier = 2 ?>" class="btn btn-primary">Subscribe</a>
                         </div>
                     </div>
@@ -140,7 +140,7 @@ if (isset($_GET['tier'])) {
                             <h5 class="card-title ">Premium 3</h5>
                             <p class="card-text">Price: 2000฿฿฿</p>
                             <p class="card-text">Expire date: 1 year</p>
-                            <p>Benefits: </p>
+                            <p>Benefits: Tier 2 + .onion site</p>
                             <a href="./premium.php?tier=<?= $tier = 3 ?>" class="btn btn-primary">Subscribe</a>
                         </div>
                     </div>
