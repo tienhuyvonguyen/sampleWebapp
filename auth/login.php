@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $e->getMessage();
     }
     //   If result matched $myusername and $mypassword, table row must be 1 row & check captcha
-    if ($capt1 != $capt2 or $capt2 == '') {
+    if ($capt1 != $capt2 || $capt2 == '') {
         $showError = "Invalid Captcha";
     } elseif ($num == 1) {
         if (!empty($_POST["remember"])) {
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
         }
-        $_SESSION['login_user'] = $myusername;
+        $_SESSION['login_user'] = htmlspecialchars($myusername);
         header("location: ../profile/userProfile.php");
     } else {
         $showError = "Your Login Name or Password is invalid";
@@ -157,7 +157,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="signup.php" class="btn btn-primary">
                 Signup
             </a>
-
+            <a href="../index.php" class="btn btn-primary">
+                Home
+            </a>
+            <!-- forgot password -->
+            <a href="forgotPassword.php" class="btn btn-primary">
+                Forgot Password
+            </a>
         </form>
     </div>
     <!-- Optional JavaScript -->

@@ -1,23 +1,22 @@
 <?php
 require("../auth/session.php");
 require("../db/dbConnect.php");
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $amountToSend = $_POST["amount"];
+    if ($amountToSend < 0) {
+        echo "<script>alert('Amount must be positive! You donkey');window.location.href='transaction.php';</script>";
+    }
     $cvv = $_POST["cvv"];
     $receiver = strtoupper($_POST["receiver"]);
     $sender = strtoupper($login_session);
     try {
-        if ($amountToSend < 0) {
-            echo "<script>alert('Amount must be positive! You donkey');window.location.href='transaction.php';</script>";
-        }
         $sql = "SELECT username from users where username = :reveiver";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':reveiver', $receiver);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $result = $result['username'];
-        if ($result == null && $receiver == $sender) {
+        if ($result == null && $receiver == $sender) { // check if receiver exists
             echo "<script>alert('Receiver does not exist');window.location.href='transaction.php';</script>";
         } elseif ($result == $receiver) {
             $sql = "SELECT * from users where username = :sender";
@@ -34,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($account_balance < $amountToSend) { //check sender balance
                 echo "<script>alert('Insufficient balance');window.location.href='transaction.php';</script>";
             } elseif ($cre_Cvv != $cvv) { //check cvv
-                echo "<script>alert('CVV is incorrect');window.location.href='transaction.php';</script>";
+                echo "<script>alert('CVV is incorrect. Check the last 3 digits of your card!');window.location.href='transaction.php';</script>";
             } else {
                 $sql = "UPDATE users SET balance = balance - :amount WHERE username = :sender"; //update sender balance
                 $stmt = $conn->prepare($sql);

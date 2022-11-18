@@ -159,6 +159,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="login.php" class="btn btn-primary">
                 Login
             </a>
+            <a href="../index.php" class="btn btn-primary">
+                Home
+            </a>
         </form>
 
     </div>

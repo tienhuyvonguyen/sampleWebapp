@@ -43,6 +43,10 @@ try {
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css'>
+  <!-- Font Awesome CSS -->
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
 </head>
 
 <body>
@@ -77,6 +81,7 @@ try {
     <center>Balance: <?php echo htmlspecialchars($balance) ?> ฿฿฿</center>
   </h2>
   <!-- top up balance -->
+  <!-- test overflow bruh -->
   <form action="topup.php" method="POST">
     <!-- amount -->
     <center>
@@ -100,15 +105,16 @@ try {
   </div>
   <!-- transaction -->
   <div class="container my-4 ">
-    <!-- show user informations from database -->
-    <form method="post" action="./updateProfile.php" enctype="multipart/form-data" >
+
+    <form method="POST" action="./avaHandle.php" enctype="multipart/form-data">
       <div class="form-group">
         <img src="<?php echo $avatar_path ?>" alt="avatar" width="100" height="100">
         <input type="file" name="fileToUpload" id="fileToUpload" accept="image/png, image/jpeg">
         <input type="submit" value="Change avatar" name="submit" id="submit">
       </div>
     </form>
-
+  </div>
+  <div class="container my-4 ">
     <form method="POST" action="./updateProfile.php">
       <div class="form-group">
         <label for="username">Username</label>
