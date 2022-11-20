@@ -3,7 +3,7 @@ include('../auth/session.php');
 try {
     $sql = "select * from users where username = :username";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':username', $login_session);
+    $stmt->bindParam(':username', $login_session, PDO::PARAM_STR);
     $stmt->execute();
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {

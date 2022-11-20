@@ -5,16 +5,12 @@ $showError = false;
 $exists = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // Include file which makes the
-    // Database Connection.
     include '../db/dbConnect.php';
 
     $username = strtoupper($_POST["username"]);
     $password = $_POST["password"];
     $cpassword = $_POST["cpassword"];
     $email = $_POST["email"];
-
 
     $sql = "Select * from users where username= :username limit 1";
     try {
@@ -25,10 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
-
-    // This sql query is use to check if
-    // the username is already present
-    // or not in our Database
+    // If username already exists
     if ($num == 0) {
         // deepcode ignore PhpSameEvalBinaryExpressiontrue: Accepted
         if (($password == $cpassword) && $exists == false) {
@@ -38,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //     PASSWORD_DEFAULT
             // );
 
-            // Password Hashing is used here.
             $sql = "INSERT INTO `users` ( `username`,
 				`userPassword`, `userEmail`) VALUES (:username, :password, :email)";
             try {
@@ -57,12 +49,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $showError = "Passwords do not match";
         }
-    } // end if
-
+    }
     if ($num > 0) {
         $exists = "Username not available";
     }
-} //end if
+}
 
 ?>
 

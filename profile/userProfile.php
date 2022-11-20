@@ -104,16 +104,18 @@ try {
     </div>
   </div>
   <!-- transaction -->
+  <!-- update avatar -->
   <div class="container my-4 ">
-
     <form method="POST" action="./avaHandle.php" enctype="multipart/form-data">
       <div class="form-group">
-        <img src="<?php echo $avatar_path ?>" alt="avatar" width="100" height="100">
+        <img src="<?php echo htmlspecialchars($avatar_path) ?>" alt="avatar" width="100" height="100">
         <input type="file" name="fileToUpload" id="fileToUpload" accept="image/png, image/jpeg">
         <input type="submit" value="Change avatar" name="submit" id="submit">
       </div>
     </form>
   </div>
+  <!-- update avatar -->
+  <!-- update profile -->
   <div class="container my-4 ">
     <form method="POST" action="./updateProfile.php">
       <div class="form-group">
@@ -124,12 +126,12 @@ try {
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" max="18">
+        <input type="password" class="form-control" id="password" name="password" >
       </div>
 
       <div class="form-group">
         <label for="cpassword">Confirm Password</label>
-        <input type="password" class="form-control" id="cpassword" name="cpassword" max="18">
+        <input type="password" class="form-control" id="cpassword" name="cpassword" >
         <small id="emailHelp" class="form-text text-muted">
           Make sure to type the same password
         </small>
@@ -137,32 +139,33 @@ try {
 
       <div class="form-group">
         <label>Firstname</label>
-        <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo  htmlspecialchars($firstname) ?>" max="50" />
+        <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo  htmlspecialchars($firstname) ?>" maxlength="50" />
       </div>
 
       <div class="form-group">
         <label>Lastname</label>
-        <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo  htmlspecialchars($lastname) ?>" max="50" />
+        <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo  htmlspecialchars($lastname) ?>" maxlength="50" />
       </div>
 
       <div class="form-group">
         <label>Credit Card</label>
-        <input type="number" class="form-control" id="creditCard" name="creditCard" value="<?php echo  htmlspecialchars($creditCard) ?>" min="0" />
+        <input type="number" class="form-control" id="creditCard" name="creditCard" value="<?php echo  htmlspecialchars($creditCard) ?>" min="0" maxlength="16"/>
       </div>
 
       <div class="form-group">
         <label>Email</label>
-        <input type="text" class="form-control" id="email" name="email" value="<?php echo  htmlspecialchars($userEmail) ?>" max="100" />
+        <input type="text" class="form-control" id="email" name="email" value="<?php echo  htmlspecialchars($userEmail) ?>" maxlength="100" />
       </div>
 
       <div class="form-group">
         <label>Phone</label>
-        <input type="text" class="form-control" id="phone" name="phone" value="<?php echo  htmlspecialchars($phone) ?>" min="0" />
+        <input type="text" class="form-control" id="phone" name="phone" value="<?php echo  htmlspecialchars($phone) ?>" min="0" maxlength="12"/>
       </div>
 
       <center><button class="btn btn-primary" id="save" name="save">Save</button></center>
     </form>
   </div>
+  <!-- update profile -->
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 

@@ -25,8 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $wallet += $balance;
             $sql = "UPDATE users SET balance = :balance WHERE username = :username";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':balance', $wallet);
-            $stmt->bindParam(':username', $login_session);
+            $stmt->bindParam(':balance', $wallet, PDO::PARAM_STR);
+            $stmt->bindParam(':username', $login_session, PDO::PARAM_STR);
             $stmt->execute();
             echo "<script>alert('Top up success!');window.location.href='userProfile.php';</script>";
         } else {

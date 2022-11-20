@@ -3,7 +3,7 @@ $host = "localhost";
 $user = "user";
 $pass = "user";
 $db = "webapp";
-try { 
+try {
     $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -15,8 +15,3 @@ try {
 } catch (PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
 }
-
-// if (!$conn) {
-//     echo "\nPDO::errorInfo():\n";
-//     print_r($dbh->errorInfo());
-// }

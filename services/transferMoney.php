@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         $sql = "SELECT username from users where username = :reveiver";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':reveiver', $receiver);
+        $stmt->bindParam(':reveiver', $receiver, PDO::PARAM_STR);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         $result = $result['username'];
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } elseif ($result == $receiver) {
             $sql = "SELECT * from users where username = :sender";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':sender', $sender);
+            $stmt->bindParam(':sender', $sender, PDO::PARAM_STR);
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $cre_Cvv = substr($row["creditCard"], -3);
