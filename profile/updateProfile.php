@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($password) && isset($cpassword) && $password != "" && $cpassword != "") {
             $sql = "select userPassword from users where username = :username";
             $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':username', $username, PDO::PARAM_STR);
             $stmt->execute();
             $row = $stmt->fetch(PDO::FETCH_ASSOC);
             $oldpassword = $row['userPassword'];

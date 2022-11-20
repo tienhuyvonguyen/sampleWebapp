@@ -33,7 +33,7 @@ $balance = $row['balance'];
     <div class="container">
         <div class="row">
             <div class="col">
-                <a href="../main.php" class="btn btn-primary float-lg-right ">Main menu</a>
+                <a href="./main.php" class="btn btn-primary float-lg-right ">Main menu</a>
                 <medium>User: <strong style=color:red><?php echo htmlspecialchars($login_session) ?></strong></medium> <br>
                 <medium>Balance: <em style=color:red><?php echo htmlspecialchars($balance) ?></em> ฿฿฿</medium>
             </div>

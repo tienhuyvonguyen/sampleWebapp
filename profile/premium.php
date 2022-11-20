@@ -90,7 +90,7 @@ if (isset($_GET['tier'])) {
     <div class="container">
         <div class="row">
             <div class="col">
-                <a href="../main.php" class="btn btn-primary float-lg-right ">Main menu</a>
+                <a href="../services/main.php" class="btn btn-primary float-lg-right ">Main menu</a>
                 <a href="../profile/userProfile.php" class="btn btn-primary float-lg-right ">Profile</a>
                 <medium>User: <strong style=color:red><?php echo htmlspecialchars($login_session) ?></strong></medium>
                 <br>

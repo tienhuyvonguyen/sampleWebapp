@@ -1,7 +1,6 @@
 <?php
 include '../auth/session.php';
 include '../db/dbConnect.php';
-include '../profile/premium.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

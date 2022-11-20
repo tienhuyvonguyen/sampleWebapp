@@ -66,7 +66,7 @@ try {
   <div class="container">
     <div class="row">
       <div class="col">
-        <a href="../main.php" class="btn btn-primary float-lg-right ">Main menu</a>
+        <a href="../services/main.php" class="btn btn-primary float-lg-right ">Main menu</a>
       </div>
     </div>
   </div>
@@ -82,7 +82,7 @@ try {
   </h2>
   <!-- top up balance -->
   <!-- test overflow bruh -->
-  <form action="topup.php" method="POST">
+  <form action="../services/topup.php" method="POST">
     <!-- amount -->
     <center>
       <input type="number" id="topup" name="topup" placeholder="Top up amount of ฿฿฿" required="required" min="0" step="0.01">
@@ -99,7 +99,7 @@ try {
   <div class="container">
     <div class="row">
       <div class="col">
-        <a href="./transaction.php" class="btn btn-primary float-lg-right ">Send Money</a>
+        <a href="../services/transaction.php" class="btn btn-primary float-lg-right ">Send Money</a>
       </div>
     </div>
   </div>
