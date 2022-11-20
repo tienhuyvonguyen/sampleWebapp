@@ -3,6 +3,16 @@ include '../auth/session.php';
 include '../db/dbConnect.php';
 
 $userTier = $_SESSION['premiumTier'];
+if ($userTier === 1) {
+  $saleOff = 0.2;
+} elseif ($userTier === 2) {
+  $saleOff = 0.3;
+} elseif ($userTier === 3) {
+  $saleOff = 0.4;
+} else {
+  $saleOff = 0;
+}
+
 // show products from database
 try {
   $sql = "SELECT * FROM product";
@@ -12,6 +22,7 @@ try {
 } catch (PDOException $e) {
   echo "Error: " . $e->getMessage();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +41,11 @@ try {
   <center>
     <h1>☜︎☹︎✋︎❄︎☜︎ MEME NFT</h1>
   </center>
-
+  <?php
+  if ($userTier != 0) {
+    echo "<h>You are a premium member! You get " . $saleOff * 100 . "% off on all product!</h>";
+  }
+  ?>
   <div class="container">
     <div class="row">
       <div class="col">
@@ -43,22 +58,34 @@ try {
     <div class="row">
       <div class="col">
         <a href="../profile/userProfile.php" class="btn btn-primary float-lg-right ">Profile</a>
+        <a href="./cart.php" class="btn btn-primary float-lg-right ">Cart</a>
       </div>
     </div>
   </div>
   <br>
   <div class="container">
     <div class="row">
-      <?php foreach ($result as $row) { ?>
+      <?php foreach ($result as $row) {
+        $price = $row["price"];
+        $price -= ($price * $saleOff); ?>
         <div class="col-md-3">
-          <form method="POST" action="addToCard.php?action=add&id=<?php echo $row["productID"]; ?>">
+          <form method="POST" action="addToCart.php?action=add&id=<?php echo htmlspecialchars($row["productID"]); ?>">
             <div class="product">
-              <img src="<?php echo $row["picture"]; ?>" class="img-responsive" height="250px" width="250px">
-              <h5 class="text-info"><?php echo $row["name"]; ?></h5>
-              <h5 class="text-danger">฿฿฿ <?php echo $row["price"]; ?></h5>
-              <input type="text" name="quantity" class="form-control" value="1" min="0" maxlength="10">
-              <input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>">
-              <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>">
+              <!-- item to show -->
+              <img src="<?php echo htmlspecialchars($row["picture"]); ?>" class="img-responsive" height="250px" width="250px">
+              <h5 class="text-info"><?php echo htmlspecialchars($row["name"]); ?></h5>
+              <h5 class="text-danger">฿฿฿ <?php
+                                          echo number_format($price, 2);  ?></h5>
+              <h5 class="text-center">Stock: <?php echo htmlspecialchars($row["stock"]); ?></h5>
+              <!-- item to show -->
+              <!-- hidden item to pass through -->
+              <input type="number" name="quantity" class="form-control" value="1" min="0" maxlength="10" max="<?php echo $row["stock"] ?>">
+              <input type="hidden" name="hidden_name" value="<?php echo htmlspecialchars($row["name"]); ?>">
+              <input type="hidden" name="hidden_price" value="<?php echo htmlspecialchars($price); ?>">
+              <input type="hidden" name="hidden_stock" value="<?php echo htmlspecialchars($row["stock"]); ?>">
+              <input type="hidden" name="hidden_id" value="<?php echo htmlspecialchars($row["productID"]); ?>">
+              <input type="hidden" name="hidden_picture" value="<?php echo htmlspecialchars($row["picture"]); ?>">
+              <!-- hidden item to pass through -->
               <input type="submit" name="add_to_cart" id="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart">
             </div>
           </form>
