@@ -1,6 +1,17 @@
 <?php
 include '../auth/session.php';
 include '../db/dbConnect.php';
+
+$userTier = $_SESSION['premiumTier'];
+// show products from database
+try {
+  $sql = "SELECT * FROM product";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute();
+  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+  echo "Error: " . $e->getMessage();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,10 +28,45 @@ include '../db/dbConnect.php';
 
 <body class="text-center">
   <center>
-    <h1>Products show here</h1>
+    <h1>☜︎☹︎✋︎❄︎☜︎ MEME NFT</h1>
   </center>
 
-
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <a href="../auth/logout.php" class="btn btn-primary float-lg-right ">Logout</a>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <a href="../profile/userProfile.php" class="btn btn-primary float-lg-right ">Profile</a>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <div class="row">
+      <?php foreach ($result as $row) { ?>
+        <div class="col-md-3">
+          <form method="POST" action="addToCard.php?action=add&id=<?php echo $row["productID"]; ?>">
+            <div class="product">
+              <img src="<?php echo $row["picture"]; ?>" class="img-responsive" height="250px" width="250px">
+              <h5 class="text-info"><?php echo $row["name"]; ?></h5>
+              <h5 class="text-danger">฿฿฿ <?php echo $row["price"]; ?></h5>
+              <input type="text" name="quantity" class="form-control" value="1" min="0" maxlength="10">
+              <input type="hidden" name="hidden_name" value="<?php echo $row["name"]; ?>">
+              <input type="hidden" name="hidden_price" value="<?php echo $row["price"]; ?>">
+              <input type="submit" name="add_to_cart" id="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart">
+            </div>
+          </form>
+        </div>
+      <?php } ?>
+    </div>
+  </div>
+  <br>
   <script src="
 https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="
 sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
