@@ -11,7 +11,6 @@ try {
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
-
 try {
     $sql = "select * from users where username = :username";
     $stmt = $conn->prepare($sql);
@@ -30,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //update user balance
     $newBalance = $user['balance'] - $cartTotal;
     if ($newBalance < 0) {
-        echo "<script type='text/javascript'>alert('Insufficient funds! You should top up your wallet!'); window.location.href = '../profile/userProfile.php';</script>";
+        echo "<script>alert('Insufficient funds! You should top up your wallet!'); window.location.href = '../profile/userProfile.php';</script>";
     } else {
         try {
             $sql = "UPDATE users SET
@@ -85,10 +84,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <a href="../profile/userProfile.php" class="btn btn-primary float-lg-right ">Profile</a>
     </div>
     <!-- show user balance -->
-    <div class="container">
-        <h3>Balance: $<?php echo $user['balance']; ?></h3>
-    </div>
-
+    <center>
+        <div class="container">
+            <h3>Balance: $<?php echo $user['balance']; ?></h3>
+        </div>
+    </center>
     <br> <br>
     <div class="container">
         <div class="row">
