@@ -6,6 +6,9 @@ include '../auth/session.php';
 if (isset($_POST["add_to_cart"])) {
     $stock = $_POST["hidden_stock"];
     $quantity = $_POST["quantity"];
+    if ($quantity <= 0) {
+        echo "<script>alert('Quantity must be greater than 0!'); window.location.href = './main.php';</script>";
+    }
     if ($quantity > $stock) {
         echo "<script>alert('Not enough stock!')</script>";
         echo "<script>window.location='main.php'</script>";

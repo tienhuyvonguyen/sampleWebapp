@@ -52,7 +52,8 @@ try {
   <div class="container">
     <div class="row">
       <div class="col">
-        <a href="../profile/userProfile.php" class="btn btn-primary float-lg-left ">Profile</a>
+        <a href="../auth/logout.php" class="btn btn-primary float-lg-left ">Logout</a>
+
         <a href="./checkout.php" class="btn btn-primary float-lg-right ">Checkout</a>
 
       </div>
@@ -62,7 +63,8 @@ try {
   <div class="container">
     <div class="row">
       <div class="col">
-        <a href="../auth/logout.php" class="btn btn-primary float-lg-left ">Logout</a>
+        <a href="../profile/userProfile.php" class="btn btn-primary float-lg-left ">Profile</a>
+
         <a href="./cart.php" class="btn btn-primary float-lg-right ">Cart</a>
       </div>
     </div>
@@ -86,17 +88,25 @@ try {
               ?>
               <h5 class="text-danger">฿฿฿ <?php
                                           echo number_format($price, 2);  ?></h5>
-              <h5 class="text-center">Stock: <?php echo htmlspecialchars($row["stock"]); ?></h5>
+              <h5 class="text-center">Stock: <?php if ($row["stock"] > 0) {
+                                                echo htmlspecialchars($row["stock"]);
+                                              } else {
+                                                echo "Out of stock";
+                                              } ?></h5>
               <!-- item to show -->
               <!-- hidden item to pass through -->
-              <input type="number" name="quantity" class="form-control" value="1" min="0" maxlength="10" max="<?php echo $row["stock"] ?>">
               <input type="hidden" name="hidden_name" value="<?php echo htmlspecialchars($row["name"]); ?>">
               <input type="hidden" name="hidden_price" value="<?php echo htmlspecialchars($price); ?>">
               <input type="hidden" name="hidden_stock" value="<?php echo htmlspecialchars($row["stock"]); ?>">
               <input type="hidden" name="hidden_id" value="<?php echo htmlspecialchars($row["productID"]); ?>">
               <input type="hidden" name="hidden_picture" value="<?php echo htmlspecialchars($row["picture"]); ?>">
               <!-- hidden item to pass through -->
-              <input type="submit" name="add_to_cart" id="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart">
+              <input type="number" name="quantity" class="form-control" value="1" min="0" maxlength="10" max="<?php echo $row["stock"] ?>">
+              <?php if ($row["stock"] > 0) { ?>
+                <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart">
+              <?php } else { ?>
+                <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" disabled>
+              <?php } ?>
               <br> <br>
             </div>
           </form>

@@ -58,7 +58,8 @@ try {
   <div class="container">
     <div class="row">
       <div class="col">
-        <a href="../auth/logout.php" class="btn btn-primary float-lg-right ">Logout</a>
+        <a href="../auth/logout.php" class="btn btn-primary float-lg-left ">Logout</a>
+        <a href="../services/main.php" class="btn btn-primary float-lg-right ">Main menu</a>
       </div>
     </div>
   </div>
@@ -66,7 +67,8 @@ try {
   <div class="container">
     <div class="row">
       <div class="col">
-        <a href="../services/main.php" class="btn btn-primary float-lg-right ">Main menu</a>
+        <a href="../services/transaction.php" class="btn btn-primary float-lg-left ">Send Money</a>
+        <a href="../services/cart.php" class="btn btn-primary float-lg-right ">Cart</a>
       </div>
     </div>
   </div>
@@ -95,15 +97,7 @@ try {
     </center>
   </form>
   <!-- top up balance -->
-  <!-- transaction -->
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <a href="../services/transaction.php" class="btn btn-primary float-lg-right ">Send Money</a>
-      </div>
-    </div>
-  </div>
-  <!-- transaction -->
+
   <!-- update avatar -->
   <div class="container my-4 ">
     <form method="POST" action="./avaHandle.php" enctype="multipart/form-data">
@@ -126,12 +120,12 @@ try {
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" name="password" >
+        <input type="password" class="form-control" id="password" name="password">
       </div>
 
       <div class="form-group">
         <label for="cpassword">Confirm Password</label>
-        <input type="password" class="form-control" id="cpassword" name="cpassword" >
+        <input type="password" class="form-control" id="cpassword" name="cpassword">
         <small id="emailHelp" class="form-text text-muted">
           Make sure to type the same password
         </small>
@@ -149,7 +143,7 @@ try {
 
       <div class="form-group">
         <label>Credit Card</label>
-        <input type="number" class="form-control" id="creditCard" name="creditCard" value="<?php echo  htmlspecialchars($creditCard) ?>" min="0" maxlength="16"/>
+        <input type="number" class="form-control" id="creditCard" name="creditCard" value="<?php echo  htmlspecialchars($creditCard) ?>" min="0" maxlength="16" />
       </div>
 
       <div class="form-group">
@@ -159,7 +153,7 @@ try {
 
       <div class="form-group">
         <label>Phone</label>
-        <input type="text" class="form-control" id="phone" name="phone" value="<?php echo  htmlspecialchars($phone) ?>" min="0" maxlength="12"/>
+        <input type="text" class="form-control" id="phone" name="phone" value="<?php echo  htmlspecialchars($phone) ?>" min="0" maxlength="12" />
       </div>
 
       <center><button class="btn btn-primary" id="save" name="save">Save</button></center>

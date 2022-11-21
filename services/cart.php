@@ -41,7 +41,7 @@
             if (isset($_SESSION['shopping_cart'])) {
                 $cart = $_SESSION['shopping_cart'];
                 foreach ($cart as $key => $value) {
-                    $total = $total + ($value['item_price'] * $value['item_quantity']);
+                    $total += $value['item_quantity'] * $value['item_price'];
             ?>
                     <div class="col-md-3">
                         <div class="product">
@@ -69,7 +69,7 @@
                     </div>
             <?php
                 }
-            } else {
+            } elseif (empty($_SESSION['shopping_cart'])) {
                 echo "<center><h1>Cart is empty</h1></center>";
             }
             ?>

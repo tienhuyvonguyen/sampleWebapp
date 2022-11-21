@@ -5,36 +5,31 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Index Page</title>
+	<title>☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1,
 		shrink-to-fit=no">
-
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
-<body>
-	<h1>
-		<center>Index Page</center>
-	</h1>
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<a href="./auth/signup.php" class="btn btn-primary float-lg-right ">Sign Up</a>
+<body style="background-color: burlywood;">
+
+	<center>
+		<h1>☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿 ⤜($ ͟ʖ$)⤏</h1>
+	</center>
+	<br>
+	<center>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<a href="./auth/signup.php" class="btn btn-primary">Sign Up</a>
+					<a href="./auth/login.php" class="btn btn-primary">Login</a>
+				</div>
 			</div>
 		</div>
-	</div>
-	<br>
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<a href="./auth/login.php" class="btn btn-primary float-lg-right ">Login</a>
-			</div>
-		</div>
-	</div>
-	<br>
+	</center>
 	<script src="
 https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="
 sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
@@ -48,5 +43,19 @@ https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity=
 https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
 	</script>
 </body>
+<footer>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<center>
+		<h6>© 2020-2021, All Rights Reserved</h6>
+	</center>
+	<div class="card-footer">
+		<div class="row">
+			<div class="col">
+				<p class="text-center"> Made with ❤️ by Valen </p>
+			</div>
+		</div>
+	</div>
+</footer>
+
 
 </html>

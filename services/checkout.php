@@ -39,6 +39,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':balance', $newBalance);
             $stmt->bindParam(':username', $username);
             $stmt->execute();
+            foreach ($cart as $item) {
+                try {
+                    $sql = "UPDATE product SET
+                                stock = stock - :quantity
+                            WHERE productID = :product_id ";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bindParam(':quantity', $item['item_quantity']);
+                    $stmt->bindParam(':product_id', $item['item_id']);
+                    $stmt->execute();
+                } catch (PDOException $e) {
+                    echo "Error: " . $e->getMessage();
+                }
+            }
             unset($_SESSION['shopping_cart']);
             echo "<script>alert('Order placed! Thank you for shopping with us!'); window.location.href = './main.php';</script>";
         } catch (PDOException $e) {
@@ -46,19 +59,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     // update stock quantity
-    foreach ($cart as $item) {
-        try {
-            $sql = "UPDATE product SET
-                        stock = stock - :quantity
-                    WHERE productID = :product_id ";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(':quantity', $item['item_quantity']);
-            $stmt->bindParam(':product_id', $item['item_id']);
-            $stmt->execute();
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
+    // foreach ($cart as $item) {
+    //     try {
+    //         $sql = "UPDATE product SET
+    //                     stock = stock - :quantity
+    //                 WHERE productID = :product_id ";
+    //         $stmt = $conn->prepare($sql);
+    //         $stmt->bindParam(':quantity', $item['item_quantity']);
+    //         $stmt->bindParam(':product_id', $item['item_id']);
+    //         $stmt->execute();
+    //     } catch (PDOException $e) {
+    //         echo "Error: " . $e->getMessage();
+    //     }
+    // }
 }
 
 ?>
