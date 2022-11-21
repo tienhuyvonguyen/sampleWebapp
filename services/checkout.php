@@ -4,13 +4,14 @@ include '../auth/session.php';
 include '../db/dbConnect.php';
 $username = strtoupper($login_session);
 try {
-    $sql = "SELECT * FROM product";
+    $sql = "SELECT * FROM product ";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $product = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
+
 try {
     $sql = "select * from users where username = :username";
     $stmt = $conn->prepare($sql);
@@ -41,6 +42,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute();
             unset($_SESSION['shopping_cart']);
             echo "<script>alert('Order placed! Thank you for shopping with us!'); window.location.href = './main.php';</script>";
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+    // update stock quantity
+    foreach ($cart as $item) {
+        try {
+            $sql = "UPDATE product SET
+                        stock = stock - :quantity
+                    WHERE productID = :product_id ";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':quantity', $item['item_quantity']);
+            $stmt->bindParam(':product_id', $item['item_id']);
+            $stmt->execute();
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
@@ -102,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </tbody>
                 </table>
                 <h3>Total: <?php echo number_format($cartTotal, 2); ?> ฿฿฿</h3>
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                     <div class="form-group ">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" value="<?php echo $user['name']; ?>">
