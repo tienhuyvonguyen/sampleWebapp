@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['login_user'] = htmlspecialchars($myusername); // set username in session
         $_SESSION["login_time_stamp"] = time(); //set login time
         $_SESSION["premiumTier"] = $result->fetch(PDO::FETCH_ASSOC)['premiumTier'];
-        echo "<script>alert('Login Successful!'); window.location.href='../profile/userProfile.php';</script>";
+        echo "<script>alert('Login Successful!'); window.location.href='../services/main.php';</script>";
     } elseif ($num == 0) {
         $showError = "Invalid Username or Password";
     } else {

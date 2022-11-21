@@ -3,11 +3,12 @@ include '../auth/session.php';
 include '../db/dbConnect.php';
 
 $userTier = $_SESSION['premiumTier'];
-if ($userTier === 1) {
+
+if ($userTier == 1) {
   $saleOff = 0.2;
-} elseif ($userTier === 2) {
+} elseif ($userTier == 2) {
   $saleOff = 0.3;
-} elseif ($userTier === 3) {
+} elseif ($userTier == 3) {
   $saleOff = 0.4;
 } else {
   $saleOff = 0;
@@ -32,24 +33,28 @@ try {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>☜︎☹︎✋︎❄︎☜︎ MEME NFT</title>
+  <title> ⤜($ ͟ʖ$)⤏</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
 <body class="text-center">
   <center>
-    <h1>☜︎☹︎✋︎❄︎☜︎ MEME NFT</h1>
+    <h1>☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿 ⤜($ ͟ʖ$)⤏</h1>
   </center>
   <?php
   if ($userTier != 0) {
     echo "<h>You are a premium member! You get " . $saleOff * 100 . "% off on all product!</h>";
+  } else {
+    echo "<a href='../profile/premium.php'>Upgrade to premium to get promotion on all product!</a>";
   }
   ?>
   <div class="container">
     <div class="row">
       <div class="col">
-        <a href="../auth/logout.php" class="btn btn-primary float-lg-right ">Logout</a>
+        <a href="../profile/userProfile.php" class="btn btn-primary float-lg-left ">Profile</a>
+        <a href="./checkout.php" class="btn btn-primary float-lg-right ">Checkout</a>
+
       </div>
     </div>
   </div>
@@ -57,7 +62,7 @@ try {
   <div class="container">
     <div class="row">
       <div class="col">
-        <a href="../profile/userProfile.php" class="btn btn-primary float-lg-right ">Profile</a>
+        <a href="../auth/logout.php" class="btn btn-primary float-lg-left ">Logout</a>
         <a href="./cart.php" class="btn btn-primary float-lg-right ">Cart</a>
       </div>
     </div>
@@ -69,11 +74,16 @@ try {
         $price = $row["price"];
         $price -= ($price * $saleOff); ?>
         <div class="col-md-3">
-          <form method="POST" action="addToCart.php?action=add&id=<?php echo htmlspecialchars($row["productID"]); ?>">
+          <form method="POST" action="addToCart.php?id=<?php echo htmlspecialchars($row["productID"]); ?>">
             <div class="product">
               <!-- item to show -->
               <img src="<?php echo htmlspecialchars($row["picture"]); ?>" class="img-responsive" height="250px" width="250px">
               <h5 class="text-info"><?php echo htmlspecialchars($row["name"]); ?></h5>
+              <?php
+              if ($userTier != 0) {
+                echo "<h5 class='text-danger'  style='text-decoration: line-through;'>฿฿฿ " . number_format($row["price"], 2) . "</h5>";
+              }
+              ?>
               <h5 class="text-danger">฿฿฿ <?php
                                           echo number_format($price, 2);  ?></h5>
               <h5 class="text-center">Stock: <?php echo htmlspecialchars($row["stock"]); ?></h5>
@@ -87,6 +97,7 @@ try {
               <input type="hidden" name="hidden_picture" value="<?php echo htmlspecialchars($row["picture"]); ?>">
               <!-- hidden item to pass through -->
               <input type="submit" name="add_to_cart" id="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart">
+              <br> <br>
             </div>
           </form>
         </div>
@@ -109,3 +120,48 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrit
 </body>
 
 </html>
+<style>
+  * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  .HoverDiv {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid black;
+    width: 360px;
+    margin: 10px;
+  }
+
+  .HoverDiv img {
+    max-width: 100%;
+    text-align: center;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+
+  .HoverDiv:hover img {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+
+  img {
+    display: inline-block;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    transition: 0.3s;
+    position: relative;
+    z-index: 1;
+  }
+
+  img:hover {
+    transform: scale(1.5);
+  }
+</style>

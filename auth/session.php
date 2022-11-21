@@ -12,7 +12,7 @@ try {
     echo "Error: " . $e->getMessage();
 }
 $login_session = strtoupper($row['username']);
-if (time() - $_SESSION["login_time_stamp"] > 10000000000) { //subtract new timestamp from the old one
+if (time() - $_SESSION["login_time_stamp"] > 3600) { //subtract new timestamp from the old one
     header("Location: ../sessionout.html");
     session_unset();
     session_destroy();

@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $wallet = $row['balance'];
         $cre_Cvv = substr($row['creditCard'], -3);
         if ($cre_Cvv == null) {
-            echo "<script>alert('You have no credit card! Please update it to use this function!');window.location.href='userProfile.php';</script>";
+            echo "<script>alert('You have no credit card! Please update it to use this function!');window.location.href='../profile/userProfile.php';</script>";
         }
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
@@ -28,9 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':balance', $wallet, PDO::PARAM_STR);
             $stmt->bindParam(':username', $login_session, PDO::PARAM_STR);
             $stmt->execute();
-            echo "<script>alert('Top up success!');window.location.href='userProfile.php';</script>";
+            echo "<script>alert('Top up success!');window.location.href='../profile/userProfile.php';</script>";
         } else {
-            echo "<script>alert('CVV is incorrect! Last 3 digits of your card!');window.location.href='userProfile.php';</script>";
+            echo "<script>alert('CVV is incorrect! Last 3 digits of your card!');window.location.href='../profile/userProfile.php';</script>";
         }
     }
     // show error
