@@ -40,9 +40,9 @@ if (isset($_POST["submit"])) {
         echo "Sorry, your file was not uploaded.";
     } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded";
+            // echo "The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded";
         } else {
-            echo "<script>alert('Sorry, there was an error uploading your file.')</script>";
+            echo "<script>alert('Sorry, there was an error uploading your file.'); window.location.href='userProfile.php';</script>";
         }
     }
     $newAvatar = $target_file;

@@ -55,7 +55,7 @@ try {
     <h1>☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿 ⤜($ ͟ʖ$)⤏</h1>
   </center>
   <h3>
-    <center>Welcome <?php echo "<em style=color:red> $username </em>" ?> to profile page</center>
+    <center>Welcome <?php echo "<em style=color:red font: bold;>" . $username . "</em>"; ?>!</center>
   </h3>
   <!-- logout -->
   <div class="container">
