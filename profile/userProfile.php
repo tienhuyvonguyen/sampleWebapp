@@ -111,7 +111,7 @@ try {
     <form method="POST" action="./avaHandle.php" enctype="multipart/form-data">
       <div class="form-group">
         <img src="<?php echo htmlspecialchars($avatar_path) ?>" alt="avatar" width="100" height="100">
-        <input type="file" name="fileToUpload" id="fileToUpload" accept="image/png, image/jpeg">
+        <input type="file" name="fileToUpload" id="fileToUpload" accept="image/png, image/jpeg, image/jpg, image/gif" required>
         <input type="submit" value="Change avatar" name="submit" id="submit">
       </div>
     </form>
