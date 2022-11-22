@@ -15,7 +15,6 @@
 </head>
 
 <body style="background-color: burlywood;">
-
 	<center>
 		<h1>☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿 ⤜($ ͟ʖ$)⤏</h1>
 	</center>
@@ -56,6 +55,5 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrit
 		</div>
 	</div>
 </footer>
-
 
 </html>

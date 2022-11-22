@@ -80,7 +80,7 @@ if (isset($_GET['tier'])) {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-color: wheat;">
     <!-- welcome -->
     <h1>
         <center>Premium register</center>
@@ -106,9 +106,9 @@ if (isset($_GET['tier'])) {
             <center>
                 <div class="col">
                     <div class="card" style="width: 18rem;">
-                        <img src="https://wallpapertops.com/walldb/original/c/2/1/699013.jpg" class="card-img-top" alt="...">
+                        <img src="../uploads/699013.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title`">Premium Tier 1</h5>
+                            <h5 class="card-title`">Premium 1</h5>
                             <p class="card-text">Price: 500฿฿฿</p>
                             <p class="card-text">Expire date: 1 month</p>
                             <p>Benefits: 20% off</p>
@@ -120,7 +120,7 @@ if (isset($_GET['tier'])) {
             <center>
                 <div class="col">
                     <div class="card" style="width: 18rem;">
-                        <img src="http://wp.production.patheos.com/blogs/laughingindisbelief/files/2016/06/satan.jpeg" class="card-img-top" alt="...">
+                        <img src="../uploads/satan.jpeg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title ">Premium 2</h5>
                             <p class="card-text">Price: 1000฿฿฿</p>
@@ -135,7 +135,7 @@ if (isset($_GET['tier'])) {
             <center>
                 <div class="col">
                     <div class="card" style="width: 18rem;">
-                        <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/baphomet-satanic-pentagram-black-red-sofia-metal-queen.jpg" class="card-img-top" alt="...">
+                        <img src="../uploads/baphomet-satanic-pentagram-black-red-sofia-metal-queen.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title ">Premium 3</h5>
                             <p class="card-text">Price: 2000฿฿฿</p>

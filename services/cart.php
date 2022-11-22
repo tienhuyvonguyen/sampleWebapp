@@ -13,7 +13,7 @@
 
 <!-- show user cart in session -->
 
-<body class="text-center">
+<body class="text-center" style="background-color: wheat;">
     <center>
         <h1>☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿 ⤜($ ͟ʖ$)⤏</h1>
     </center>

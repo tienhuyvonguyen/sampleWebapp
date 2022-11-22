@@ -13,10 +13,9 @@ try {
 }
 $login_session = strtoupper($row['username']);
 if (time() - $_SESSION["login_time_stamp"] > 3600) { //subtract new timestamp from the old one
-    header("Location: ../sessionout.html");
     session_unset();
     session_destroy();
-    header("Location: ./login.php");
+    header("Location: ../sessionout.html");
 }
 if (!isset($login_session)) { //if login in session is not set
     header("location: ./login.php");

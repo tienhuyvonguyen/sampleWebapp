@@ -10,16 +10,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mypassword = $_POST['password'];
     $capt1 = $_POST["vercode"];
     $capt2 = $_SESSION["vercode"]; //vercode is the session variable that holds the captcha code
-    // $hash = password_hash(
-    //     $mypassword,
-    //     PASSWORD_DEFAULT salt
-    // ); md5
-
-    $sql = "SELECT * FROM users WHERE username = :myusername and userPassword = :mypassword";
+    $sql = "SELECT * FROM users WHERE username = :myusername";
     try {
         $result = $conn->prepare($sql);
         $result->bindParam(':myusername', $myusername, PDO::PARAM_STR);
-        $result->bindParam(':mypassword', $mypassword, PDO::PARAM_STR);
         $result->execute();
         $num = $result->rowCount();
     } catch (PDOException $e) {
@@ -28,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //If result matched $myusername and $mypassword, table row must be 1 row & check captcha
     if ($capt1 != $capt2 || $capt2 == '') { //vercode is the session variable that holds the captcha code
         $showError = "Invalid Captcha";
-    } elseif ($num == 1) {
+    } elseif ($num == 1 && password_verify($mypassword, $result->fetchColumn(2))) {
         if (!empty($_POST["remember"])) {
             //COOKIES for username set httpdonly
             setcookie("user_login", htmlspecialchars($_POST["username"]), time() + (86400 * 7),  NULL, NULL, NULL, TRUE); // 86400 = 1 day
@@ -70,7 +64,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-color: burlywood;">
+    <center>
+        <h1>☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿 ⤜($ ͟ʖ$)⤏</h1>
+    </center>
 
     <?php
 

@@ -49,11 +49,14 @@ try {
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
 </head>
 
-<body>
+<body style="background-color: wheat;">
   <!-- welcome -->
-  <h1>
+  <center>
+    <h1>☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿 ⤜($ ͟ʖ$)⤏</h1>
+  </center>
+  <h3>
     <center>Welcome <?php echo "<em style=color:red> $username </em>" ?> to profile page</center>
-  </h1>
+  </h3>
   <!-- logout -->
   <div class="container">
     <div class="row">
@@ -83,6 +86,7 @@ try {
     <center>Balance: <?php echo htmlspecialchars($balance) ?> ฿฿฿</center>
   </h2>
   <!-- top up balance -->
+
   <!-- test overflow bruh -->
   <form action="../services/topup.php" method="POST">
     <!-- amount -->
@@ -97,7 +101,11 @@ try {
     </center>
   </form>
   <!-- top up balance -->
-
+  <?php
+  if ($premium === 3) {
+    echo "<br><a href=''><center><small class='text-muted d-sm-table-cell'>Link to our onion site</small></center></a>";
+  }
+  ?>
   <!-- update avatar -->
   <div class="container my-4 ">
     <form method="POST" action="./avaHandle.php" enctype="multipart/form-data">

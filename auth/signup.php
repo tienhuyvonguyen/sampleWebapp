@@ -26,17 +26,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // deepcode ignore PhpSameEvalBinaryExpressiontrue: Accepted
         if (($password == $cpassword) && $exists == false) {
 
-            // $hash = password_hash(
-            //     $password,
-            //     PASSWORD_DEFAULT
-            // );
+            $hash = password_hash(
+                $password,
+                PASSWORD_DEFAULT
+            );
 
             $sql = "INSERT INTO `users` ( `username`,
 				`userPassword`, `userEmail`) VALUES (:username, :password, :email)";
             try {
                 $result = $conn->prepare($sql);
                 $result->bindParam(':username', $username, PDO::PARAM_STR);
-                $result->bindParam(':password', $password, PDO::PARAM_STR);
+                $result->bindParam(':password', $hash, PDO::PARAM_STR);
                 $result->bindParam(':email', $email, PDO::PARAM_STR);
                 $result->execute();
             } catch (PDOException $e) {
@@ -72,8 +72,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
-<body>
-
+<body style="background-color: burlywood;">
+    <center>
+        <h1>☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿 ⤜($ ͟ʖ$)⤏</h1>
+    </center>
     <?php
 
     if ($showAlert) {

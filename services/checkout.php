@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background-color: wheat;">
     <center>
         <h1>☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿 ⤜($ ͟ʖ$)⤏</h1>
     </center>
@@ -102,12 +102,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h3>Balance: $<?php echo $user['balance']; ?></h3>
         </div>
     </center>
-    <br> <br>
+    <div class="container">
+        <a href="../services/cart.php" class="btn btn-primary float-lg-right">Cart</a>
+    </div>
+    <br><br>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <h1>Checkout</h1>
-                <table class="table table-striped">
+                <table class="table table-striped" style="background-color: white;">
                     <thead>
                         <tr>
                             <th scope="col">Product</th>
