@@ -1,10 +1,7 @@
 <?php
-
 $showError = false;
-
 require("../db/dbConnect.php");
 session_start();
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $myusername = strtoupper($_POST['username']);
     $mypassword = $_POST['password'];
@@ -16,13 +13,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result->bindParam(':myusername', $myusername, PDO::PARAM_STR);
         $result->execute();
         $num = $result->rowCount();
+        $data = $result->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
+    $premium = $data['premiumTier'];
     //If result matched $myusername and $mypassword, table row must be 1 row & check captcha
-    if ($capt1 != $capt2 || $capt2 == '') { //vercode is the session variable that holds the captcha code
+    if ($capt1 != $capt2 || $capt1 == '') { //vercode is the session variable that holds the captcha code
         $showError = "Invalid Captcha";
-    } elseif ($num == 1 && password_verify($mypassword, $result->fetchColumn(2))) {
+    } elseif ($num == 1 && password_verify($mypassword, $data['userPassword'])) {
         if (!empty($_POST["remember"])) {
             //COOKIES for username set httpdonly
             setcookie("user_login", htmlspecialchars($_POST["username"]), time() + (86400 * 7),  NULL, NULL, NULL, TRUE); // 86400 = 1 day
@@ -38,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         $_SESSION['login_user'] = htmlspecialchars($myusername); // set username in session
         $_SESSION["login_time_stamp"] = time(); //set login time
-        $_SESSION["premiumTier"] = $result->fetch(PDO::FETCH_ASSOC)['premiumTier'];
+        $_SESSION['premiumTier'] =  $premium;
         echo "<script>alert('Login Successful!'); window.location.href='../services/main.php';</script>";
     } elseif ($num == 0) {
         $showError = "Invalid Username or Password";
