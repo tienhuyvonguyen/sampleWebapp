@@ -6,15 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $myusername = strtoupper($_POST['username']);
     $mypassword = $_POST['password'];
     // captcha
-    // $capt1 = $_POST["vercode"];
-    // $capt2 = $_SESSION["vercode"]; //vercode is the session variable that holds the captcha code
-    // captcha
-    // Storing google recaptcha response
-    // in $recaptcha variable
-
-    // working here
     $recaptcha = $_POST['g-recaptcha-response'];
-
     // Put secret key here, which we get
     // from google console
     $secret_key = '6LcxVSsjAAAAAGs-Ggs2uLLqk9ZCNK-P9fxfJmvY';
@@ -34,8 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $response = json_decode($response);
 
     // captcha
-    // working here
-
     $sql = "SELECT * FROM users WHERE username = :myusername";
     try {
         $result = $conn->prepare($sql);
@@ -88,13 +78,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1,
 		shrink-to-fit=no">
     <title>Login</title>
-    <link rel="stylesheet" href="style.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
-<body style="background-color: white;">
+<body style="background-color: burlywood;">
     <center>
         <h1>☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿 ⤜($ ͟ʖ$)⤏</h1>
     </center>
@@ -158,20 +147,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                                                                                         } ?>">
             </div>
             <!-- captcha -->
-            <!-- <div class="form-group small clearfix">
-                <label class="checkbox-inline">Captcha</label>
-                <img src="captcha.php">
-            </div>
-            <div class="form-group">
-                <input type="text" name="vercode" class="form-control" placeholder="Captcha" required="required">
-            </div> -->
-            <div class="container1">
-
-                <!-- div to show reCAPTCHA -->
                 <div class="g-recaptcha" data-sitekey="6LcxVSsjAAAAAEDBn2g4J81XrX6lJxV_A-bL7HU_">
                 </div>
-                <br>
-            </div>
+            <br>
             <!-- captcha -->
 
             <!-- remember me -->
@@ -227,14 +205,6 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrit
         margin-top: 10px;
     }
 
-    input[type="text"] {
-        padding: 10px;
-        border-radius: 5px;
-        margin: 10px;
-        font-family: "Times New Roman", Times, serif;
-        font-size: larger;
-    }
-
     button {
         border-radius: 5px;
         padding: 10px;
@@ -252,6 +222,6 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrit
     }
 
     .g-recaptcha {
-        margin-left: 513px;
+        margin-left: 0px;
     }
 </style>

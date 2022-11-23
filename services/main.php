@@ -3,8 +3,6 @@ include '../auth/session.php';
 include '../db/dbConnect.php';
 session_start();
 $userTier = $_SESSION['premiumTier'];
-echo $userTier;
-echo "debug";
 if ($userTier == 1) {
   $saleOff = 0.2;
 } elseif ($userTier == 2) {
@@ -54,9 +52,7 @@ try {
     <div class="row">
       <div class="col">
         <a href="../auth/logout.php" class="btn btn-primary float-lg-left ">Logout</a>
-
         <a href="./checkout.php" class="btn btn-primary float-lg-right ">Checkout</a>
-
       </div>
     </div>
   </div>
