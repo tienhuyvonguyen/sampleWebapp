@@ -1,9 +1,10 @@
 <?php
 include '../auth/session.php';
 include '../db/dbConnect.php';
-
+session_start();
 $userTier = $_SESSION['premiumTier'];
-
+echo $userTier;
+echo "debug";
 if ($userTier == 1) {
   $saleOff = 0.2;
 } elseif ($userTier == 2) {

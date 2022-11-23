@@ -52,6 +52,7 @@ if (isset($_GET['tier'])) {
             $stmt->bindParam(':expireDate', $expireDate);
             $stmt->bindParam(':username', $username);
             $stmt->execute();
+            $_SESSION['premiumTier'] = $tier;
             echo "<script>alert('You have successfully upgraded to premium tier $tier!');window.location.href='premium.php';</script>";
         } elseif ($prepareBalance < $price) {
             echo "<script>alert('You do not have enough balance to upgrade to premium tier $tier!');window.location.href='premium.php';</script>";
