@@ -5,8 +5,37 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $myusername = strtoupper($_POST['username']);
     $mypassword = $_POST['password'];
-    $capt1 = $_POST["vercode"];
-    $capt2 = $_SESSION["vercode"]; //vercode is the session variable that holds the captcha code
+    // captcha
+    // $capt1 = $_POST["vercode"];
+    // $capt2 = $_SESSION["vercode"]; //vercode is the session variable that holds the captcha code
+    // captcha
+    // Storing google recaptcha response
+    // in $recaptcha variable
+
+    // working here
+    $recaptcha = $_POST['g-recaptcha-response'];
+
+    // Put secret key here, which we get
+    // from google console
+    $secret_key = '6LcxVSsjAAAAAGs-Ggs2uLLqk9ZCNK-P9fxfJmvY';
+
+    // Hitting request to the URL, Google will
+    // respond with success or error scenario
+    $url = 'https://www.google.com/recaptcha/api/siteverify?secret='
+        . $secret_key . '&response=' . $recaptcha;
+
+    // Making request to verify captcha
+    // file deepcode ignore PT: accept
+    $response = file_get_contents($url);
+
+    // Response return by google is in
+    // JSON format, so we have to parse
+    // that json
+    $response = json_decode($response);
+
+    // captcha
+    // working here
+
     $sql = "SELECT * FROM users WHERE username = :myusername";
     try {
         $result = $conn->prepare($sql);
@@ -19,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $premium = $data['premiumTier'];
     //If result matched $myusername and $mypassword, table row must be 1 row & check captcha
-    if ($capt1 != $capt2 || $capt1 == '') { //vercode is the session variable that holds the captcha code
+    if ($response->success == false) { //vercode is the session variable that holds the captcha code
         $showError = "Invalid Captcha";
     } elseif ($num == 1 && password_verify($mypassword, $data['userPassword'])) {
         if (!empty($_POST["remember"])) {
@@ -53,17 +82,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 
 <head>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1,
 		shrink-to-fit=no">
     <title>Login</title>
+    <link rel="stylesheet" href="style.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
-<body style="background-color: burlywood;">
+<body style="background-color: white;">
     <center>
         <h1>☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿 ⤜($ ͟ʖ$)⤏</h1>
     </center>
@@ -112,9 +143,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ?>
 
     <div class="container my-4 ">
-
         <h1 class="text-center">Login</h1>
-        <form action="login.php" method="post">
+        <form action="login.php" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" required="required" value="<?php if (isset($_COOKIE["user_login"])) {
@@ -128,12 +158,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                                                                                         } ?>">
             </div>
             <!-- captcha -->
-            <div class="form-group small clearfix">
+            <!-- <div class="form-group small clearfix">
                 <label class="checkbox-inline">Captcha</label>
                 <img src="captcha.php">
             </div>
             <div class="form-group">
                 <input type="text" name="vercode" class="form-control" placeholder="Captcha" required="required">
+            </div> -->
+            <div class="container1">
+
+                <!-- div to show reCAPTCHA -->
+                <div class="g-recaptcha" data-sitekey="6LcxVSsjAAAAAEDBn2g4J81XrX6lJxV_A-bL7HU_">
+                </div>
+                <br>
             </div>
             <!-- captcha -->
 
@@ -177,3 +214,44 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrit
 </body>
 
 </html>
+<style>
+    .container1 {
+        border: 1px solid rgb(73, 72, 72);
+        border-radius: 10px;
+        margin: auto;
+        padding: 10px;
+        text-align: center;
+    }
+
+    h1 {
+        margin-top: 10px;
+    }
+
+    input[type="text"] {
+        padding: 10px;
+        border-radius: 5px;
+        margin: 10px;
+        font-family: "Times New Roman", Times, serif;
+        font-size: larger;
+    }
+
+    button {
+        border-radius: 5px;
+        padding: 10px;
+        color: #fff;
+        background-color: #167deb;
+        border-color: #0062cc;
+        font-weight: bolder;
+        cursor: pointer;
+    }
+
+    button:hover {
+        text-decoration: none;
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+
+    .g-recaptcha {
+        margin-left: 513px;
+    }
+</style>
