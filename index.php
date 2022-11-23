@@ -14,9 +14,9 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
-<body style="background-color: burlywood;">
+<body background="./uploads/wp2878786-satan-hd-wallpaper.jpg" background-size="contain">
 	<center>
-		<h1>☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿 ⤜($ ͟ʖ$)⤏</h1>
+		<h1 style="color: red;">☜︎☹︎✋︎❄︎☜︎ 𝕸𝕰𝕸𝕰 𝕹𝕱𝕿 ⤜($ ͟ʖ$)⤏</h1>
 	</center>
 	<br>
 	<center>
@@ -45,12 +45,12 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrit
 <footer>
 	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 	<center>
-		<h6>© 2020-2021, All Rights Reserved</h6>
+		<h6 style="color: white;">© 2020-2021, All Rights Reserved</h6>
 	</center>
 	<div class="card-footer">
 		<div class="row">
 			<div class="col">
-				<p class="text-center"> Made with ❤️ by Valen </p>
+				<p class="text-center" style="color: white;"> Made with ❤️ by Valen </p>
 			</div>
 		</div>
 	</div>
