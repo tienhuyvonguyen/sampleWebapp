@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +40,6 @@
     <div class="container">
         <div class="row">
             <?php
-            session_start();
             if (isset($_SESSION['shopping_cart'])) {
                 $cart = $_SESSION['shopping_cart'];
                 foreach ($cart as $key => $value) {

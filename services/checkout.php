@@ -21,10 +21,6 @@ try {
     echo "Error: " . $e->getMessage();
 }
 $cart = $_SESSION['shopping_cart'];
-$cartTotal = 0;
-foreach ($cart as $item) {
-    $cartTotal += $item['item_price'] * $item['item_quantity'];
-}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //update user balance
     $newBalance = $user['balance'] - $cartTotal;
@@ -121,13 +117,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($cart as $item) {
-                            echo "<tr>";
-                            echo "<td>" . $item['item_name'] . "</td>";
-                            echo "<td>" . number_format($item['item_price'], 2) . "</td>";
-                            echo "<td>" . $item['item_quantity'] . "</td>";
-                            echo "<td>" . number_format(($item['item_price'] * $item['item_quantity']), 2) . "</td>";
-                            echo "</tr>";
+                        if (!empty($cart)) {
+                            foreach ($cart as $item) {
+                                $cartTotal = 0;
+                                echo "<tr>";
+                                echo "<td>" . $item['item_name'] . "</td>";
+                                echo "<td>" . number_format($item['item_price'], 2) . "</td>";
+                                echo "<td>" . $item['item_quantity'] . "</td>";
+                                echo "<td>" . number_format(($item['item_price'] * $item['item_quantity']), 2) . "</td>";
+                                echo "</tr>";
+                                $cartTotal += $item['item_price'] * $item['item_quantity'];
+                            }
                         }
                         ?>
                     </tbody>
