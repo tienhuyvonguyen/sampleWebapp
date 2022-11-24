@@ -1,5 +1,6 @@
 # sampleWebapp project 
-Synk security for vuln and code quality check
++ Synk security for vuln and code quality check
++ 
 - ~~Đăng ký tài khoản~~
 - ~~Đăng nhập (có tính năng remember me, sử dụng captcha)~~
 - ~~Nạp tiền qua thẻ điện thoại working on it~~
