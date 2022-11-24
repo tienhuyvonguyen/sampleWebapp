@@ -1,10 +1,28 @@
 # sampleWebapp project 
-Synk security for vuln and code quality check
-- ~~Đăng ký tài khoản~~
-- ~~Đăng nhập (có tính năng remember me, sử dụng captcha)~~
-- ~~Nạp tiền qua thẻ điện thoại working on it~~
-- ~~Mua đồ trên website (quần áo, thẻ game...)~~
-- ~~Nâng cấp tài khoản vip (phí hàng tháng, hàng năm 200k, 1.5m...)~~
-- ~~Tài khoản vip truy cập được mua đồ giá rẻ hơn 30%~~
-- ~~Chuyển tiền online giữa các tài khoản~~
-- ~~Trang thông tin cá nhân cho phép cập nhật avatar, thông tin tài khoản như họ tên, email, số điện thoại, thay đổi mật khẩu...~~ 
+
+* Visit website at https://huyvo.tech hosted on Google Cloud Platform
+* Synk security for vuln and code quality check
+* SSL cerrtificate for https connection provided by zeroSSL & report at: https://www.ssllabs.com/ssltest/analyze.html?d=huyvo.tech&s=35.240.219.228
+* Config apache server with SSL certificate
+* Config apache redirect http to https and www to non-www
+* Dockerize project
+    - Command to compose the project: docker compose up
+    - Command to stop the project: docker compose down
+    - Access the project at: 
+        + for wabsite: https://localhost:8080
+        + for phpmyadmin: https://localhost:8443/phpmyadmin
+            - root-username: root
+            - root-password: secret
+            - user-username: user
+            - user-password: user
+
+* Funtions *
+- Login
+- Register
+- Top up balance
+- Place order
+- Upgrade account to VIP
+- Vip account can place order with discount
+- Online payment 
+- Update profile
+
