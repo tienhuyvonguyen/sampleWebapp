@@ -1,8 +1,8 @@
-<!-- top up user balance -->
 <?php
 // include database connection
 include_once('../db/dbConnect.php');
 include_once('../auth/session.php');
+session_start();
 // check if form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {

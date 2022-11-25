@@ -21,6 +21,10 @@ try {
     echo "Error: " . $e->getMessage();
 }
 $cart = $_SESSION['shopping_cart'];
+$cartTotal = 0;
+foreach ($cart as $key => $value) {
+    $cartTotal += $value['item_price'];
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     //update user balance
     $newBalance = $user['balance'] - $cartTotal;
@@ -54,20 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error: " . $e->getMessage();
         }
     }
-    // update stock quantity
-    // foreach ($cart as $item) {
-    //     try {
-    //         $sql = "UPDATE product SET
-    //                     stock = stock - :quantity
-    //                 WHERE productID = :product_id ";
-    //         $stmt = $conn->prepare($sql);
-    //         $stmt->bindParam(':quantity', $item['item_quantity']);
-    //         $stmt->bindParam(':product_id', $item['item_id']);
-    //         $stmt->execute();
-    //     } catch (PDOException $e) {
-    //         echo "Error: " . $e->getMessage();
-    //     }
-    // }
 }
 
 ?>
