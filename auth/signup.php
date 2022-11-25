@@ -1,17 +1,15 @@
 <?php
-
+ini_set("display_errors", "0");
 $showAlert = false;
 $showError = false;
 $exists = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include '../db/dbConnect.php';
-
-    $username = strtoupper($_POST["username"]);
-    $password = $_POST["password"];
-    $cpassword = $_POST["cpassword"];
-    $email = $_POST["email"];
-
+    include '../db/dbConnect.php'; // Database connection
+    $username = strtoupper($_POST['username']);
+    $password = $_POST['password'];
+    $cpassword = $_POST['cpassword'];
+    $email = $_POST['email'];
     $sql = "Select * from users where username= :username limit 1";
     try {
         $result = $conn->prepare($sql);
@@ -122,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container my-4 ">
 
         <h1 class="text-center">Signup</h1>
-        <form action="signup.php" method="post">
+        <form action="signup.php" method="POST">
 
             <div class="form-group">
                 <label for="username">Username</label>
