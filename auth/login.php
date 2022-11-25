@@ -147,8 +147,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                                                                                         } ?>">
             </div>
             <!-- captcha -->
-                <div class="g-recaptcha" data-sitekey="6LcxVSsjAAAAAEDBn2g4J81XrX6lJxV_A-bL7HU_">
-                </div>
+            <div class="g-recaptcha" data-sitekey="6LcxVSsjAAAAAEDBn2g4J81XrX6lJxV_A-bL7HU_">
+            </div>
             <br>
             <!-- captcha -->
 
@@ -169,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 Home
             </a>
             <!-- forgot password -->
-            <a href="forgotPassword.php" class="btn btn-primary">
+            <a href="forgotPassword.php" class="btn btn-primary disabled">
                 Forgot Password
             </a>
         </form>
