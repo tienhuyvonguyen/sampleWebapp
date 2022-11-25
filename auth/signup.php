@@ -43,7 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($result) {
                 $showAlert = true;
             }
-            echo "<script>alert('Sign up Successful!'); window.location.href='./login.php';</script>";
+            echo  "<script>alert('User created successfully. You can now login.')</script>";
+            echo "<script>window.location.href = 'login.php'</script>";
         } else {
             $showError = "Passwords do not match";
         }
